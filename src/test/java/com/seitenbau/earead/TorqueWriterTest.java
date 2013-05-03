@@ -37,6 +37,7 @@ public class TorqueWriterTest {
 		bookTable.setColumn(columnList);
 
 		List<TableType> tableList = new ArrayList<TableType>();
+		tableList.add(bookTable);
 		database.setTable(tableList);
 
 		// create JAXB context and instantiate marshaller
