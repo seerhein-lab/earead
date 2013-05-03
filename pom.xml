@@ -6,24 +6,18 @@
   <artifactId>sb-uml-parser</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>sb-uml-parser</name>
-  <description>
-    Parsing EAP files (Sparx Enterprise Architect)
-    and creating schema file for the Apache Torque code generator
-  </description>
-  
-  <!-- 
-  <scm>
-    <connection>scm:svn:https://svn1.seitenbau.net/entwicklung/evaluation/sb-uml-parser</connection>
-  </scm>
- -->
- 
+  <description>Parsing EAP files (Sparx Enterprise Architect) and creating schema file for the Apache Torque code generator.</description>
+
+  <!-- <scm> <connection>scm:svn:https://svn1.seitenbau.net/entwicklung/evaluation/sb-uml-parser</connection> 
+    </scm> -->
+
   <repositories>
     <repository>
       <id>JBossRepo</id>
       <url>http://repository.jboss.com/maven2/</url>
     </repository>
   </repositories>
-  
+
   <dependencies>
     <dependency>
       <groupId>org.sparx</groupId>
@@ -36,9 +30,24 @@
       <version>2.2.5</version>
     </dependency>
     <dependency>
-        <groupId>org.jvnet.jaxb2_commons</groupId>
-        <artifactId>jaxb2-basics-runtime</artifactId>
-        <version>0.6.2</version>
+      <groupId>com.sun.xml.bind</groupId>
+      <artifactId>jaxb-impl</artifactId>
+      <version>2.2.5</version>
+    </dependency>
+    <dependency>
+      <groupId>javax.activation</groupId>
+      <artifactId>activation</artifactId>
+      <version>1.1</version>
+    </dependency>
+    <dependency>
+      <groupId>stax</groupId>
+      <artifactId>stax-api</artifactId>
+      <version>1.0.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.jvnet.jaxb2_commons</groupId>
+      <artifactId>jaxb2-basics-runtime</artifactId>
+      <version>0.6.2</version>
     </dependency>
     <dependency>
       <groupId>log4j</groupId>
@@ -83,12 +92,10 @@
         <configuration>
           <forceRegenerate>true</forceRegenerate>
           <schemaDirectory>${basedir}/src/main/resources/export</schemaDirectory>
+          <bindingDirectory>${basedir}/src/main/resources/export</bindingDirectory>
           <generateDirectory>${project.build.directory}/generated-sources</generateDirectory>
           <generatePackage>org.apache.torque</generatePackage>
-          <removeOldOutput>true</removeOldOutput>  
-          <!-- TODO
-          <bindingDirectory>${project.build.directory}/xsd/binding/rest</bindingDirectory>
-           -->
+          <removeOldOutput>true</removeOldOutput>
           <schemaIncludes>
             <include>database-4-0.xsd</include>
           </schemaIncludes>
@@ -98,11 +105,17 @@
             <arg>-XtoString</arg>
             <arg>-Xequals</arg>
             <arg>-XhashCode</arg>
+            <arg>-Xannotate</arg>
           </args>
           <plugins>
             <plugin>
               <groupId>org.jvnet.jaxb2_commons</groupId>
               <artifactId>jaxb2-basics</artifactId>
+              <version>0.6.2</version>
+            </plugin>
+            <plugin>
+              <groupId>org.jvnet.jaxb2_commons</groupId>
+              <artifactId>jaxb2-basics-annotate</artifactId>
               <version>0.6.2</version>
             </plugin>
           </plugins>

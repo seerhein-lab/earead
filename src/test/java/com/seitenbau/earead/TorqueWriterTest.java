@@ -46,7 +46,7 @@ public class TorqueWriterTest {
 		m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 
 		// Write to System.out
-		// m.marshal(database, System.out);
+		m.marshal(database, System.out);
 	}
 
 }

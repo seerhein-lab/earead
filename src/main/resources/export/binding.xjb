@@ -14,18 +14,13 @@
         <xjc:serializable uid="1" />
     </jaxb:globalBindings>
  
-    <!-- Annotate the following classes with XmlRootElement 
-    <jaxb:bindings schemaLocation="schema.xsd" node="/xs:schema">
-        <jaxb:bindings node="xs:complexType[@name='user']">
+    <!-- Annotate the following classes with XmlRootElement -->
+    <jaxb:bindings schemaLocation="database-4-0.xsd" node="/xs:schema">
+        <jaxb:bindings node="xs:complexType[@name='databaseType']">
             <annox:annotate>
-                <annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="user" />
-            </annox:annotate>
-        </jaxb:bindings>
-        <jaxb:bindings node="xs:complexType[@name='userList']">
-            <annox:annotate>
-                <annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="userList" />
+                <annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="databaseType" />
             </annox:annotate>
         </jaxb:bindings>
     </jaxb:bindings>
-	-->
+
 </jaxb:bindings>
