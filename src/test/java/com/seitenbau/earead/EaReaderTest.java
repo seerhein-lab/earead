@@ -23,6 +23,7 @@ public class EaReaderTest {
 		for (Package packageModel : models) {
 			printPackage(packageModel, "");
 		}
+		repository.Exit();
 	}
 
 	private static void printPackage(Package packageToPrint, String indent) {
