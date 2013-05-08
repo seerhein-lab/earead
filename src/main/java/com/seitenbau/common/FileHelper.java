@@ -2,7 +2,6 @@ package com.seitenbau.common;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.net.URL;
 import java.util.logging.Logger;
 
 /**
@@ -28,14 +27,14 @@ public abstract class FileHelper {
 		String method = "getFile(): ";
 		LOG.info(method + "Start");
 
-		URL fileUrl = ClassLoader.getSystemResource(filePath);
-		if (fileUrl == null) {
-			String msg = "Cannot find file: " + filePath;
+		File file = new File(filePath);
+		if (!file.exists()) {
+			String msg = "File does not exists: " + filePath;
 			LOG.info(method + msg);
-			throw new FileNotFoundException(filePath);
+			throw new FileNotFoundException(msg);
 		}
 
 		LOG.info(method + "End");
-		return new File(fileUrl.getFile());
+		return file;
 	}
 }

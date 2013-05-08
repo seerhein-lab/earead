@@ -30,12 +30,6 @@ public class EaReader {
 		String method = "openRepository(eapFile): ";
 		LOG.info(method + "Start");
 
-		if (!eapFile.exists()) {
-			String msg = "File does not exists: " + eapFile.getName();
-			LOG.info(method + msg);
-			throw new Exception(msg);
-		}
-		
 		Repository repository = new Repository();
 		// only a file with the absolute path can be loaded
 		String absolutePath = eapFile.getAbsolutePath();
@@ -63,7 +57,7 @@ public class EaReader {
 			throws Exception {
 		String method = "openRepository(eapFilePath): ";
 		LOG.info(method + "Start");
-		
+
 		File eapFile = FileHelper.getFile(eapFilePath);
 		Repository repository = openRepository(eapFile);
 

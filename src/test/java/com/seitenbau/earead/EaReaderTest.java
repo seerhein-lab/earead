@@ -16,7 +16,7 @@ public class EaReaderTest {
 	 * -Djava.library.path=C:\Projekte\sb-uml-parser\lib
 	 */
 	public static void main(String[] argv) throws Exception {
-		String eapFilePath = "./import/import.eap";
+		String eapFilePath = "src/main/resources/import/import.eap";
 
 		Repository repository = EaReader.openRepository(eapFilePath);
 		Collection<Package> models = repository.GetModels();
