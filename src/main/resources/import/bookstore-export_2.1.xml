@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<xmi:XMI xmi:version="2.1" xmlns:uml="http://schema.omg.org/spec/UML/2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:thecustomprofile="http://www.sparxsystems.com/profiles/thecustomprofile/1.0" xmlns:Datenmodell="http://www.sparxsystems.com/profiles/Datenmodell/1.0">
+	<xmi:Documentation exporter="Enterprise Architect" exporterVersion="6.5"/>
+	<uml:Model xmi:type="uml:Model" name="EA_Model" visibility="public">
+		<packagedElement xmi:type="uml:Package" xmi:id="EAPK_5EFB90E7_6831_405a_A275_C69A0D76A95D" name="MKO_Bookstore" visibility="public">
+			<packagedElement xmi:type="uml:Class" xmi:id="EAID_CC3B2BBA_6A98_4d3c_A542_A86949BB96F9" name="ETY_Author" visibility="public">
+				<ownedAttribute xmi:type="uml:Property" xmi:id="EAID_53AB4304_9FAE_4308_AB5E_EF15F3EA61ED" name="ATT_Author_Id" visibility="private" isStatic="false" isReadOnly="false" isDerived="false" isOrdered="false" isUnique="true" isDerivedUnion="false">
+					<lowerValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000001_9FAE_4308_AB5E_EF15F3EA61ED" value="1"/>
+					<upperValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000002_9FAE_4308_AB5E_EF15F3EA61ED" value="1"/>
+					<type xmi:idref="EAJava_int"/>
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property" xmi:id="EAID_3DC5C913_8DE4_4b0e_9174_48AA22E4AFBA" name="ATT_Books" visibility="private" isStatic="false" isReadOnly="false" isDerived="false" isOrdered="false" isUnique="true" isDerivedUnion="false">
+					<lowerValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000003_8DE4_4b0e_9174_48AA22E4AFBA" value="1"/>
+					<upperValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000004_8DE4_4b0e_9174_48AA22E4AFBA" value="1"/>
+					<type xmi:idref="EAJava_List&lt;ETY_Books&gt;"/>
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property" xmi:id="EAID_D8F1386B_9B3B_44ae_82F2_1B502B72A1DB" name="ATT_Name" visibility="private" isStatic="false" isReadOnly="false" isDerived="false" isOrdered="false" isUnique="true" isDerivedUnion="false">
+					<lowerValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000005_9B3B_44ae_82F2_1B502B72A1DB" value="1"/>
+					<upperValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000006_9B3B_44ae_82F2_1B502B72A1DB" value="1"/>
+					<type xmi:idref="EAJava_String"/>
+				</ownedAttribute>
+			</packagedElement>
+			<packagedElement xmi:type="uml:Association" xmi:id="EAID_99B54C91_D1FD_4c06_9F81_056C44CDE317" visibility="public">
+				<memberEnd xmi:idref="EAID_dstB54C91_D1FD_4c06_9F81_056C44CDE317"/>
+				<memberEnd xmi:idref="EAID_srcB54C91_D1FD_4c06_9F81_056C44CDE317"/>
+				<ownedEnd xmi:type="uml:Property" xmi:id="EAID_srcB54C91_D1FD_4c06_9F81_056C44CDE317" name="ATT_Books" visibility="public" association="EAID_99B54C91_D1FD_4c06_9F81_056C44CDE317" isStatic="false" isReadOnly="false" isDerived="false" isOrdered="false" isUnique="true" isDerivedUnion="false" aggregation="composite">
+					<type xmi:idref="EAID_AFCDB1E2_2BF3_45ca_92DE_24B9F2884677"/>
+					<lowerValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000007__D1FD_4c06_9F81_056C44CDE317" value="0"/>
+					<upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="EAID_LI000008__D1FD_4c06_9F81_056C44CDE317" value="-1"/>
+				</ownedEnd>
+			</packagedElement>
+			<packagedElement xmi:type="uml:Class" xmi:id="EAID_AFCDB1E2_2BF3_45ca_92DE_24B9F2884677" name="ETY_Book" visibility="public">
+				<ownedAttribute xmi:type="uml:Property" xmi:id="EAID_F4F8611A_6C94_4114_8D6E_EC2474BC8B67" name="ATT_Author_Id" visibility="private" isStatic="false" isReadOnly="false" isDerived="false" isOrdered="false" isUnique="true" isDerivedUnion="false">
+					<lowerValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000009_6C94_4114_8D6E_EC2474BC8B67" value="1"/>
+					<upperValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000010_6C94_4114_8D6E_EC2474BC8B67" value="1"/>
+					<type xmi:idref="EAJava_String"/>
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property" xmi:id="EAID_B878F912_8305_492d_AD1C_BAE94A5C5B72" name="ATT_Book_Id" visibility="private" isStatic="false" isReadOnly="false" isDerived="false" isOrdered="false" isUnique="true" isDerivedUnion="false">
+					<lowerValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000011_8305_492d_AD1C_BAE94A5C5B72" value="1"/>
+					<upperValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000012_8305_492d_AD1C_BAE94A5C5B72" value="1"/>
+					<type xmi:idref="EAJava_int"/>
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property" xmi:id="EAID_3E4712CC_0CC6_47f7_8018_BC22817030DA" name="ATT_Isbn" visibility="private" isStatic="false" isReadOnly="false" isDerived="false" isOrdered="false" isUnique="true" isDerivedUnion="false">
+					<lowerValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000013_0CC6_47f7_8018_BC22817030DA" value="1"/>
+					<upperValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000014_0CC6_47f7_8018_BC22817030DA" value="1"/>
+					<type xmi:idref="EAJava_String"/>
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property" xmi:id="EAID_B9B6784C_871C_48cd_B702_3E6C03B13097" name="ATT_Title" visibility="private" isStatic="false" isReadOnly="false" isDerived="false" isOrdered="false" isUnique="true" isDerivedUnion="false">
+					<lowerValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000015_871C_48cd_B702_3E6C03B13097" value="1"/>
+					<upperValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000016_871C_48cd_B702_3E6C03B13097" value="1"/>
+					<type xmi:idref="EAJava_String"/>
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property" xmi:id="EAID_dstB54C91_D1FD_4c06_9F81_056C44CDE317" visibility="public" association="EAID_99B54C91_D1FD_4c06_9F81_056C44CDE317" isStatic="false" isReadOnly="false" isDerived="false" isOrdered="false" isUnique="true" isDerivedUnion="false" aggregation="none">
+					<type xmi:idref="EAID_CC3B2BBA_6A98_4d3c_A542_A86949BB96F9"/>
+					<lowerValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000017__D1FD_4c06_9F81_056C44CDE317" value="1"/>
+					<upperValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000018__D1FD_4c06_9F81_056C44CDE317" value="1"/>
+				</ownedAttribute>
+			</packagedElement>
+		</packagedElement>
+		<Datenmodell:Entitätstyp base_Class="EAID_CC3B2BBA_6A98_4d3c_A542_A86949BB96F9" Persistenz="persistent"/>
+		<thecustomprofile:Schlüsselattribut base_Attribute="EAID_53AB4304_9FAE_4308_AB5E_EF15F3EA61ED"/>
+		<Datenmodell:IstTeilVon base_Aggregation="EAID_99B54C91_D1FD_4c06_9F81_056C44CDE317"/>
+		<Datenmodell:Entitätstyp base_Class="EAID_AFCDB1E2_2BF3_45ca_92DE_24B9F2884677" Persistenz="persistent"/>
+		<thecustomprofile:Schlüsselattribut base_Attribute="EAID_B878F912_8305_492d_AD1C_BAE94A5C5B72"/>
+	</uml:Model>
+	<xmi:Extension extender="Enterprise Architect" extenderID="6.5">
+		<elements>
+			<element xmi:idref="EAPK_5EFB90E7_6831_405a_A275_C69A0D76A95D" xmi:type="uml:Package" name="MKO_Bookstore" scope="public">
+				<model package2="EAID_5EFB90E7_6831_405a_A275_C69A0D76A95D" package="EAPK_6AB66A52_8000_49b3_B20A_3894BEE58463" tpos="0" ea_localid="46" ea_eleType="package"/>
+				<properties documentation="Die Modellkomponente für den Bookstore" isSpecification="false" sType="Package" nType="0" scope="public"/>
+				<project author="nkunstek" version="1.0" phase="1.0" created="2012-10-10 10:47:04" modified="2013-04-15 09:39:52" complexity="1" status="Proposed"/>
+				<code gentype="Java"/>
+				<style appearance="BackColor=-1;BorderColor=-1;BorderWidth=-1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+				<modelDocument/>
+				<tags/>
+				<xrefs/>
+				<extendedProperties tagged="0" package_name="Datenmodell"/>
+				<packageproperties version="1.0"/>
+				<paths/>
+				<times created="2012-10-10 00:00:00" modified="2012-10-10 00:00:00"/>
+				<flags iscontrolled="FALSE" isprotected="FALSE" usedtd="FALSE" logxml="FALSE"/>
+			</element>
+			<element xmi:idref="EAID_CC3B2BBA_6A98_4d3c_A542_A86949BB96F9" xmi:type="uml:Class" name="ETY_Author" scope="public">
+				<model package="EAPK_5EFB90E7_6831_405a_A275_C69A0D76A95D" tpos="0" ea_localid="226" ea_eleType="element"/>
+				<properties documentation="Der Autor." isSpecification="false" sType="Class" nType="0" scope="public" stereotype="Entitätstyp" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
+				<project author="nkunstek" version="1.0" phase="1.0" created="2012-10-10 10:51:10" modified="2013-04-15 09:45:40" complexity="1" status="Proposed"/>
+				<code gentype="Java"/>
+				<style appearance="BackColor=10079487;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+				<modelDocument/>
+				<tags>
+					<tag xmi:id="EAID_80C22EF7_4DF4_504d_8A43_AD074FCE1ABA" name="Persistenz" value="persistent#NOTES#Values: persistent,transient&#xA;Default: persistent&#xA;" modelElement="EAID_CC3B2BBA_6A98_4d3c_A542_A86949BB96F9"/>
+					<tag xmi:id="EAID_54102894_4791_9e47_B902_F44A400FCC38" name="Referenzen" modelElement="EAID_CC3B2BBA_6A98_4d3c_A542_A86949BB96F9"/>
+				</tags>
+				<xrefs value="$XREFPROP=$XID={BD7B1AE8-EE87-4869-A458-95E8CAAF7E97}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=Entitätstyp;GUID={6427DB82-0586-43bf-B6C2-1A28E9792BF9};@ENDSTEREO;$DES;$CLT={CC3B2BBA-6A98-4d3c-A542-A86949BB96F9}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;$XREFPROP=$XID={44FA750D-7622-4f32-B45C-8C2C82F9D2B9}$XID;$NAM=CustomProperties$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@PROP=@NAME=isActive@ENDNAME;@TYPE=Boolean@ENDTYPE;@VALU=@ENDVALU;@PRMT=@ENDPRMT;@ENDPROP;$DES;$CLT={CC3B2BBA-6A98-4d3c-A542-A86949BB96F9}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
+				<extendedProperties tagged="0" package_name="MKO_Bookstore"/>
+				<attributes>
+					<attribute xmi:idref="EAID_53AB4304_9FAE_4308_AB5E_EF15F3EA61ED" name="ATT_Author_Id" scope="Private">
+						<initial/>
+						<documentation value="Die Id des Autors (als eindeutiger Schlüssel, der den Autor innerhalb der Anwendung eindeutig identifiziert; wird nur aus technischen Gründen benötigt)"/>
+						<model ea_localid="42" ea_guid="{53AB4304-9FAE-4308-AB5E-EF15F3EA61ED}"/>
+						<properties type="int" derived="0" collection="false" duplicates="0" changeability="changeable"/>
+						<coords ordered="0"/>
+						<containment containment="Not Specified" position="0"/>
+						<stereotype stereotype="Schlüsselattribut"/>
+						<bounds lower="1" upper="1"/>
+						<options/>
+						<style/>
+						<styleex value="IsLiteral=0;volatile=0;"/>
+						<tags/>
+						<xrefs value="$XREFPROP=$XID={7C517917-06F7-4964-95A0-1BCBC47C9B8C}$XID;$NAM=Stereotypes$NAM;$TYP=attribute property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=Schlüsselattribut;GUID={4530A1D9-CFE6-4c24-A88D-B03EC1F50D92};@ENDSTEREO;$DES;$CLT={53AB4304-9FAE-4308-AB5E-EF15F3EA61ED}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
+					</attribute>
+					<attribute xmi:idref="EAID_3DC5C913_8DE4_4b0e_9174_48AA22E4AFBA" name="ATT_Books" scope="Private">
+						<initial/>
+						<documentation value="Die Bücher eines Autors."/>
+						<model ea_localid="218" ea_guid="{3DC5C913-8DE4-4b0e-9174-48AA22E4AFBA}"/>
+						<properties type="List&lt;ETY_Books&gt;" derived="0" collection="false" duplicates="0" changeability="changeable"/>
+						<coords ordered="0"/>
+						<containment containment="Not Specified" position="2"/>
+						<stereotype/>
+						<bounds lower="1" upper="1"/>
+						<options/>
+						<style/>
+						<styleex value="IsLiteral=0;volatile=0;"/>
+						<tags/>
+						<xrefs/>
+					</attribute>
+					<attribute xmi:idref="EAID_D8F1386B_9B3B_44ae_82F2_1B502B72A1DB" name="ATT_Name" scope="Private">
+						<initial/>
+						<documentation value="Der Name des Autors."/>
+						<model ea_localid="51" ea_guid="{D8F1386B-9B3B-44ae-82F2-1B502B72A1DB}"/>
+						<properties type="String" derived="0" collection="false" duplicates="0" changeability="changeable"/>
+						<coords ordered="0"/>
+						<containment containment="Not Specified" position="1"/>
+						<stereotype/>
+						<bounds lower="1" upper="1"/>
+						<options/>
+						<style/>
+						<styleex value="IsLiteral=0;volatile=0;"/>
+						<tags/>
+						<xrefs/>
+					</attribute>
+				</attributes>
+				<links>
+					<Aggregation xmi:id="EAID_99B54C91_D1FD_4c06_9F81_056C44CDE317" start="EAID_AFCDB1E2_2BF3_45ca_92DE_24B9F2884677" end="EAID_CC3B2BBA_6A98_4d3c_A542_A86949BB96F9"/>
+				</links>
+			</element>
+			<element xmi:idref="EAID_AFCDB1E2_2BF3_45ca_92DE_24B9F2884677" xmi:type="uml:Class" name="ETY_Book" scope="public">
+				<model package="EAPK_5EFB90E7_6831_405a_A275_C69A0D76A95D" tpos="0" ea_localid="475" ea_eleType="element"/>
+				<properties documentation="Das Buch eines Autors." isSpecification="false" sType="Class" nType="0" scope="public" stereotype="Entitätstyp" isRoot="false" isLeaf="false" isAbstract="false" isActive="false"/>
+				<project author="nkunstek" version="1.0" phase="1.0" created="2012-11-02 13:56:15" modified="2013-04-15 09:50:31" complexity="1" status="Proposed"/>
+				<code gentype="Java"/>
+				<style appearance="BackColor=10079487;BorderColor=-1;BorderWidth=1;FontColor=-1;VSwimLanes=1;HSwimLanes=1;BorderStyle=0;"/>
+				<modelDocument/>
+				<tags>
+					<tag xmi:id="EAID_80C22EF7_4DF4_504d_B0E3_96F4D6525EC3" name="Persistenz" value="persistent#NOTES#Values: persistent,transient&#xA;Default: persistent&#xA;" modelElement="EAID_AFCDB1E2_2BF3_45ca_92DE_24B9F2884677"/>
+					<tag xmi:id="EAID_54102894_4791_9e47_BBA4_62BBAACBB516" name="Referenzen" modelElement="EAID_AFCDB1E2_2BF3_45ca_92DE_24B9F2884677"/>
+				</tags>
+				<xrefs value="$XREFPROP=$XID={86EC7D41-B94F-4dc1-BC26-F638485C4552}$XID;$NAM=Stereotypes$NAM;$TYP=element property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=Entitätstyp;GUID={6427DB82-0586-43bf-B6C2-1A28E9792BF9};@ENDSTEREO;$DES;$CLT={AFCDB1E2-2BF3-45ca-92DE-24B9F2884677}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
+				<extendedProperties tagged="0" package_name="MKO_Bookstore"/>
+				<attributes>
+					<attribute xmi:idref="EAID_F4F8611A_6C94_4114_8D6E_EC2474BC8B67" name="ATT_Author_Id" scope="Private">
+						<initial/>
+						<documentation value="Die Id des Autors."/>
+						<model ea_localid="151" ea_guid="{F4F8611A-6C94-4114-8D6E-EC2474BC8B67}"/>
+						<properties type="String" derived="0" collection="false" length="0" duplicates="0" changeability="changeable"/>
+						<coords ordered="0"/>
+						<containment containment="Not Specified" position="0"/>
+						<stereotype/>
+						<bounds lower="1" upper="1"/>
+						<options/>
+						<style/>
+						<styleex value="volatile=0;IsLiteral=0;"/>
+						<tags/>
+						<xrefs/>
+					</attribute>
+					<attribute xmi:idref="EAID_B878F912_8305_492d_AD1C_BAE94A5C5B72" name="ATT_Book_Id" scope="Private">
+						<initial/>
+						<documentation value="Die Id des Buches (als eindeutiger Schlüssel, der die Bücher innerhalb der Anwendung eindeutig identifiziert; wird nur aus technischen Gründen benötigt)"/>
+						<model ea_localid="149" ea_guid="{B878F912-8305-492d-AD1C-BAE94A5C5B72}"/>
+						<properties type="int" derived="0" collection="false" duplicates="0" changeability="changeable"/>
+						<coords ordered="0"/>
+						<containment containment="Not Specified" position="1"/>
+						<stereotype stereotype="Schlüsselattribut"/>
+						<bounds lower="1" upper="1"/>
+						<options/>
+						<style/>
+						<styleex value="IsLiteral=0;volatile=0;"/>
+						<tags/>
+						<xrefs value="$XREFPROP=$XID={5D874E8C-9FB0-446d-97ED-6C0B02854826}$XID;$NAM=Stereotypes$NAM;$TYP=attribute property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=Schlüsselattribut;GUID={4530A1D9-CFE6-4c24-A88D-B03EC1F50D92};@ENDSTEREO;$DES;$CLT={B878F912-8305-492d-AD1C-BAE94A5C5B72}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
+					</attribute>
+					<attribute xmi:idref="EAID_3E4712CC_0CC6_47f7_8018_BC22817030DA" name="ATT_Isbn" scope="Private">
+						<initial/>
+						<documentation value="Die ISBN."/>
+						<model ea_localid="156" ea_guid="{3E4712CC-0CC6-47f7-8018-BC22817030DA}"/>
+						<properties type="String" derived="0" collection="false" length="0" duplicates="0" changeability="changeable"/>
+						<coords ordered="0"/>
+						<containment containment="Not Specified" position="2"/>
+						<stereotype/>
+						<bounds lower="1" upper="1"/>
+						<options/>
+						<style/>
+						<styleex value="volatile=0;IsLiteral=0;"/>
+						<tags/>
+						<xrefs/>
+					</attribute>
+					<attribute xmi:idref="EAID_B9B6784C_871C_48cd_B702_3E6C03B13097" name="ATT_Title" scope="Private">
+						<initial/>
+						<documentation value="Der Titel des Buches."/>
+						<model ea_localid="153" ea_guid="{B9B6784C-871C-48cd-B702-3E6C03B13097}"/>
+						<properties type="String" derived="0" collection="false" length="0" duplicates="0" changeability="changeable"/>
+						<coords ordered="0"/>
+						<containment containment="Not Specified" position="4"/>
+						<stereotype/>
+						<bounds lower="1" upper="1"/>
+						<options/>
+						<style/>
+						<styleex value="volatile=0;IsLiteral=0;"/>
+						<tags/>
+						<xrefs/>
+					</attribute>
+				</attributes>
+				<links>
+					<Aggregation xmi:id="EAID_99B54C91_D1FD_4c06_9F81_056C44CDE317" start="EAID_AFCDB1E2_2BF3_45ca_92DE_24B9F2884677" end="EAID_CC3B2BBA_6A98_4d3c_A542_A86949BB96F9"/>
+				</links>
+			</element>
+		</elements>
+		<connectors>
+			<connector xmi:idref="EAID_99B54C91_D1FD_4c06_9F81_056C44CDE317">
+				<source xmi:idref="EAID_AFCDB1E2_2BF3_45ca_92DE_24B9F2884677">
+					<model ea_localid="475" type="Class" name="ETY_Book"/>
+					<role name="ATT_Books" visibility="Public" targetScope="instance"/>
+					<type multiplicity="0..*" aggregation="none" containment="Unspecified"/>
+					<constraints/>
+					<modifiers isOrdered="false" changeable="none" isNavigable="false"/>
+					<style value="Union=0;Derived=0;AllowDuplicates=0;Owned=0;Navigable=Non-Navigable;"/>
+					<documentation/>
+					<xrefs/>
+					<tags/>
+				</source>
+				<target xmi:idref="EAID_CC3B2BBA_6A98_4d3c_A542_A86949BB96F9">
+					<model ea_localid="226" type="Class" name="ETY_Author"/>
+					<role visibility="Public" targetScope="instance"/>
+					<type multiplicity="1" aggregation="composite" containment="Unspecified"/>
+					<constraints/>
+					<modifiers isOrdered="false" changeable="none" isNavigable="true"/>
+					<style value="Union=0;Derived=0;AllowDuplicates=0;Owned=0;Navigable=Navigable;"/>
+					<documentation/>
+					<xrefs/>
+					<tags/>
+				</target>
+				<model ea_localid="367"/>
+				<properties ea_type="Aggregation" subtype="Strong" stereotype="IstTeilVon" direction="Source -&gt; Destination"/>
+				<modifiers isRoot="false" isLeaf="false"/>
+				<documentation/>
+				<appearance linemode="3" linecolor="-1" linewidth="0" seqno="0" headStyle="0" lineStyle="0"/>
+				<labels lb="0..*" lt="+ATT_Books" mb=" &#xA;«IstTeilVon»" rb="1"/>
+				<extendedProperties conditional=" &#xA;«IstTeilVon»" virtualInheritance="0"/>
+				<style/>
+				<xrefs value="$XREFPROP=$XID={03B22816-8518-4d47-9FB8-4327421E7FEE}$XID;$NAM=Stereotypes$NAM;$TYP=connector property$TYP;$VIS=Public$VIS;$PAR=0$PAR;$DES=@STEREO;Name=IstTeilVon;GUID={99B611F8-B8C2-4a55-9019-3A60069E0772};@ENDSTEREO;$DES;$CLT={99B54C91-D1FD-4c06-9F81-056C44CDE317}$CLT;$SUP=&lt;none&gt;$SUP;$ENDXREF;"/>
+				<tags/>
+			</connector>
+		</connectors>
+		<primitivetypes>
+			<packagedElement xmi:type="uml:Package" xmi:id="EAPrimitiveTypesPackage" name="EA_PrimitiveTypes_Package" visibility="public">
+				<packagedElement xmi:type="uml:Package" xmi:id="EAJavaTypesPackage" name="EA_Java_Types_Package" visibility="public">
+					<packagedElement xmi:type="uml:PrimitiveType" xmi:id="EAJava_int" name="int" visibility="public">
+						<generalization xmi:type="uml:Generalization" xmi:id="EAJava_int_General">
+							<general href="http://schema.omg.org/spec/UML/2.1/uml.xml#Integer"/>
+						</generalization>
+					</packagedElement>
+					<packagedElement xmi:type="uml:PrimitiveType" xmi:id="EAJava_List&lt;ETY_Books&gt;" name="List&lt;ETY_Books&gt;" visibility="public"/>
+					<packagedElement xmi:type="uml:PrimitiveType" xmi:id="EAJava_String" name="String" visibility="public"/>
+				</packagedElement>
+			</packagedElement>
+		</primitivetypes>
+		<profiles>
+			<uml:Profile xmi:version="2.1" xmlns:uml="http://schema.omg.org/spec/UML/2.1/" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmi:id="thecustomprofile" nsPrefix="thecustomprofile" name="thecustomprofile" metamodelReference="mmref01">
+				<ownedComment xmi:type="uml:Comment" xmi:id="comment01" annotatedElement="thecustomprofile">
+					<body> Version:1.0</body>
+				</ownedComment>
+				<packageImport xmi:id="mmref01">
+					<importedPackage href="http://schema.omg.org/spec/UML/2.1/"/>
+				</packageImport>
+				<packagedElement xmi:type="uml:Stereotype" xmi:id="Schlüsselattribut" name="Schlüsselattribut">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="Schlüsselattribut-base_Attribute" name="base_Attribute" association="Attribute_Schlüsselattribut">
+						<type href="http://schema.omg.org/spec/UML/2.1/#Attribute"/>
+					</ownedAttribute>
+				</packagedElement>
+				<packagedElement xmi:type="uml:Extension" xmi:id="Attribute_Schlüsselattribut" name="A_Attribute_Schlüsselattribut" memberEnd="extension_Schlüsselattribut Schlüsselattribut-base_Attribute">
+					<ownedEnd xmi:id="extension_Schlüsselattribut" name="extension_Schlüsselattribut" type="Schlüsselattribut" isComposite="true" lower="0" upper="1" memberEnd="extension_Schlüsselattribut Schlüsselattribut-base_Attribute"/>
+				</packagedElement>
+			</uml:Profile>
+			<uml:Profile xmi:version="2.1" xmlns:uml="http://schema.omg.org/spec/UML/2.1/" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmi:id="4E4A5E5F-1" nsPrefix="Datenmodell" name="Datenmodell" metamodelReference="mmref01">
+				<ownedComment xmi:type="uml:Comment" xmi:id="comment01" annotatedElement="4E4A5E5F-1">
+					<body>Datenmodell Version:1.0</body>
+				</ownedComment>
+				<packageImport xmi:id="mmref01">
+					<importedPackage href="http://schema.omg.org/spec/UML/2.1/"/>
+				</packageImport>
+				<packagedElement xmi:type="uml:Stereotype" xmi:id="StehtInBeziehungMit" name="StehtInBeziehungMit">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="StehtInBeziehungMit-base_Association" name="base_Association" association="Association_StehtInBeziehungMit">
+						<type href="http://schema.omg.org/spec/UML/2.1/#Association"/>
+					</ownedAttribute>
+				</packagedElement>
+				<packagedElement xmi:type="uml:Extension" xmi:id="Association_StehtInBeziehungMit" name="A_Association_StehtInBeziehungMit" memberEnd="extension_StehtInBeziehungMit StehtInBeziehungMit-base_Association">
+					<ownedEnd xmi:id="extension_StehtInBeziehungMit" name="extension_StehtInBeziehungMit" type="StehtInBeziehungMit" isComposite="true" lower="0" upper="1" memberEnd="extension_StehtInBeziehungMit StehtInBeziehungMit-base_Association"/>
+				</packagedElement>
+				<packagedElement xmi:type="uml:Stereotype" xmi:id="Datentyp" name="Datentyp">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="Datentyp-base_Class" name="base_Class" association="Class_Datentyp">
+						<type href="http://schema.omg.org/spec/UML/2.1/#Class"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="Datentyp-Basistyp" name="Basistyp">
+						<type href="http://schema.omg.org/spec/UML/2.1/#String"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="Datentyp-Wertebereich" name="Wertebereich">
+						<type href="http://schema.omg.org/spec/UML/2.1/#String"/>
+					</ownedAttribute>
+				</packagedElement>
+				<packagedElement xmi:type="uml:Extension" xmi:id="Class_Datentyp" name="A_Class_Datentyp" memberEnd="extension_Datentyp Datentyp-base_Class">
+					<ownedEnd xmi:id="extension_Datentyp" name="extension_Datentyp" type="Datentyp" isComposite="true" lower="0" upper="1" memberEnd="extension_Datentyp Datentyp-base_Class"/>
+				</packagedElement>
+				<packagedElement xmi:type="uml:Stereotype" xmi:id="IstSpezialisierungVon" name="IstSpezialisierungVon">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="IstSpezialisierungVon-base_Generalization" name="base_Generalization" association="Generalization_IstSpezialisierungVon">
+						<type href="http://schema.omg.org/spec/UML/2.1/#Generalization"/>
+					</ownedAttribute>
+				</packagedElement>
+				<packagedElement xmi:type="uml:Extension" xmi:id="Generalization_IstSpezialisierungVon" name="A_Generalization_IstSpezialisierungVon" memberEnd="extension_IstSpezialisierungVon IstSpezialisierungVon-base_Generalization">
+					<ownedEnd xmi:id="extension_IstSpezialisierungVon" name="extension_IstSpezialisierungVon" type="IstSpezialisierungVon" isComposite="true" lower="0" upper="1" memberEnd="extension_IstSpezialisierungVon IstSpezialisierungVon-base_Generalization"/>
+				</packagedElement>
+				<packagedElement xmi:type="uml:Stereotype" xmi:id="Entitätstyp" name="Entitätstyp">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="Entitätstyp-base_Class" name="base_Class" association="Class_Entitätstyp">
+						<type href="http://schema.omg.org/spec/UML/2.1/#Class"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="Entitätstyp-Referenzen" name="Referenzen">
+						<type href="http://schema.omg.org/spec/UML/2.1/#String"/>
+					</ownedAttribute>
+					<ownedAttribute xmi:type="uml:Property" xmi:id="Entitätstyp-Persistenz" name="Persistenz">
+						<type href="http://schema.omg.org/spec/UML/2.1/#String"/>
+					</ownedAttribute>
+				</packagedElement>
+				<packagedElement xmi:type="uml:Extension" xmi:id="Class_Entitätstyp" name="A_Class_Entitätstyp" memberEnd="extension_Entitätstyp Entitätstyp-base_Class">
+					<ownedEnd xmi:id="extension_Entitätstyp" name="extension_Entitätstyp" type="Entitätstyp" isComposite="true" lower="0" upper="1" memberEnd="extension_Entitätstyp Entitätstyp-base_Class"/>
+				</packagedElement>
+				<packagedElement xmi:type="uml:Stereotype" xmi:id="IstTeilVon" name="IstTeilVon">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="IstTeilVon-base_Composition" name="base_Composition" association="Composition_IstTeilVon">
+						<type href="http://schema.omg.org/spec/UML/2.1/#Composition"/>
+					</ownedAttribute>
+				</packagedElement>
+				<packagedElement xmi:type="uml:Extension" xmi:id="Composition_IstTeilVon" name="A_Composition_IstTeilVon" memberEnd="extension_IstTeilVon IstTeilVon-base_Composition">
+					<ownedEnd xmi:id="extension_IstTeilVon" name="extension_IstTeilVon" type="IstTeilVon" isComposite="true" lower="0" upper="1" memberEnd="extension_IstTeilVon IstTeilVon-base_Composition"/>
+				</packagedElement>
+			</uml:Profile>
+		</profiles>
+		<diagrams>
+			<diagram xmi:id="EAID_CC909CF1_3DF6_4a54_B33E_6A29C5E1D424">
+				<model package="EAPK_5EFB90E7_6831_405a_A275_C69A0D76A95D" localID="30" owner="EAPK_5EFB90E7_6831_405a_A275_C69A0D76A95D"/>
+				<properties name="MKO_Bookstore" type="Logical"/>
+				<project author="nkunstek" version="1.0" created="2012-10-10 10:50:25" modified="2013-04-15 10:09:23"/>
+				<style1 value="ShowPrivate=1;ShowProtected=1;ShowPublic=1;HideRelationships=0;Locked=0;Border=1;HighlightForeign=1;PackageContents=1;SequenceNotes=0;ScalePrintImage=0;PPgs.cx=1;PPgs.cy=1;DocSize.cx=791;DocSize.cy=1134;ShowDetails=0;Orientation=P;Zoom=100;ShowTags=0;OpParams=1;VisibleAttributeDetail=0;ShowOpRetType=1;ShowIcons=1;CollabNums=0;HideProps=0;ShowReqs=0;ShowCons=0;PaperSize=9;HideParents=0;UseAlias=0;HideAtts=0;HideOps=0;HideStereo=0;HideElemStereo=0;ShowTests=0;ShowMaint=0;ConnectorNotation=UML 2.1;ExplicitNavigability=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;ShowNotes=0;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;"/>
+				<style2 value="ExcludeRTF=0;DocAll=0;HideQuals=0;AttPkg=1;ShowTests=0;ShowMaint=0;SuppressFOC=1;MatrixActive=0;SwimlanesActive=1;MatrixLineWidth=1;MatrixLocked=0;TConnectorNotation=UML 2.1;TExplicitNavigability=0;AdvancedElementProps=1;AdvancedFeatureProps=1;AdvancedConnectorProps=1;ProfileData=;MDGDgm=;STBLDgm=;ShowNotes=0;VisibleAttributeDetail=0;ShowOpRetType=1;SuppressBrackets=0;SuppConnectorLabels=0;PrintPageHeadFoot=0;ShowAsList=0;"/>
+				<swimlanes value="locked=false;orientation=0;width=0;inbar=false;names=false;color=0;bold=false;fcol=0;;cls=0;"/>
+				<matrixitems value="locked=false;matrixactive=false;swimlanesactive=true;width=1;"/>
+				<extendedProperties/>
+				<elements>
+					<element geometry="Left=49;Top=381;Right=218;Bottom=497;" subject="EAID_AFCDB1E2_2BF3_45ca_92DE_24B9F2884677" seqno="1" style="DUID=CDFD0E0D;HideIcon=0;"/>
+					<element geometry="Left=51;Top=202;Right=220;Bottom=294;" subject="EAID_CC3B2BBA_6A98_4d3c_A542_A86949BB96F9" seqno="2" style="DUID=F42EDD74;"/>
+					<element geometry="EDGE=1;$LLB=CX=16:CY=13:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=0:DIR=0:ROT=0;LLT=CX=60:CY=13:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=0:DIR=0:ROT=0;LMT=;LMB=CX=60:CY=13:OX=0:OY=0:HDN=1:BLD=0:ITA=0:UND=0:CLR=-1:ALN=0:DIR=0:ROT=0;LRT=;LRB=CX=6:CY=13:OX=0:OY=0:HDN=0:BLD=0:ITA=0:UND=0:CLR=-1:ALN=0:DIR=0:ROT=0;IRHS=;ILHS=;Path=;" subject="EAID_99B54C91_D1FD_4c06_9F81_056C44CDE317" style="Mode=2;EOID=F42EDD74;SOID=CDFD0E0D;Color=-1;LWidth=0;Hidden=0;"/>
+				</elements>
+			</diagram>
+		</diagrams>
+	</xmi:Extension>
+</xmi:XMI>
