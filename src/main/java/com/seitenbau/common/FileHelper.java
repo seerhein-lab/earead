@@ -2,7 +2,8 @@ package com.seitenbau.common;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.logging.Logger;
+
+import org.apache.log4j.Logger;
 
 /**
  * Helper class for reading and writing files.
@@ -12,7 +13,7 @@ import java.util.logging.Logger;
 public abstract class FileHelper {
 
 	/** The logger. */
-	private static final Logger LOG = Logger.getLogger("FileHelper");
+	private static final Logger LOG = Logger.getLogger(FileHelper.class);
 
 	/**
 	 * Returns the file of the given relative file path name.
@@ -25,16 +26,16 @@ public abstract class FileHelper {
 	 */
 	public static File getFile(String filePath) throws FileNotFoundException {
 		String method = "getFile(): ";
-		LOG.info(method + "Start");
+		LOG.debug(method + "Start");
 
 		File file = new File(filePath);
 		if (!file.exists()) {
 			String msg = "File does not exists: " + filePath;
-			LOG.info(method + msg);
+			LOG.error(method + msg);
 			throw new FileNotFoundException(msg);
 		}
 
-		LOG.info(method + "End");
+		LOG.debug(method + "End");
 		return file;
 	}
 }

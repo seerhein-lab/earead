@@ -1,8 +1,8 @@
 package com.seitenbau.earead;
 
 import java.io.File;
-import java.util.logging.Logger;
 
+import org.apache.log4j.Logger;
 import org.sparx.Repository;
 
 import com.seitenbau.common.FileHelper;
@@ -15,7 +15,7 @@ import com.seitenbau.common.FileHelper;
 public class EaReader {
 
 	/** The logger. */
-	private static final Logger LOG = Logger.getLogger("EapReader");
+	private static final Logger LOG = Logger.getLogger(EaReader.class);
 
 	/**
 	 * Opens and loads a repository for the given eap file.
@@ -28,7 +28,7 @@ public class EaReader {
 	 */
 	public static Repository openRepository(File eapFile) throws Exception {
 		String method = "openRepository(eapFile): ";
-		LOG.info(method + "Start");
+		LOG.debug(method + "Start");
 
 		Repository repository = new Repository();
 		// only a file with the absolute path can be loaded
@@ -36,11 +36,11 @@ public class EaReader {
 		boolean isFileLoaded = repository.OpenFile(absolutePath);
 		if (!isFileLoaded) {
 			String msg = "Error loading eap file: " + absolutePath;
-			LOG.info(method + msg);
+			LOG.error(method + msg);
 			throw new Exception(msg);
 		}
 
-		LOG.info(method + "End");
+		LOG.debug(method + "End");
 		return repository;
 	}
 
@@ -56,12 +56,12 @@ public class EaReader {
 	public static Repository openRepository(String eapFilePath)
 			throws Exception {
 		String method = "openRepository(eapFilePath): ";
-		LOG.info(method + "Start");
+		LOG.debug(method + "Start");
 
 		File eapFile = FileHelper.getFile(eapFilePath);
 		Repository repository = openRepository(eapFile);
 
-		LOG.info(method + "End");
+		LOG.debug(method + "End");
 		return repository;
 	}
 }
