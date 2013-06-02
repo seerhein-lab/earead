@@ -73,12 +73,15 @@ public class UMLModel {
  
     public static Resource load(URI uri) {
         registerPathmaps(uri);
+
         org.eclipse.uml2.uml.Package package_ = null;
         Resource resource = null;
  
         try {
             resource = RESOURCE_SET.getResource(uri, true);
- 
+
+            //für den test wird nur die resource zurückgegeben, weil die Zeile unten nicht funktioniert
+            //und null zurück liefert.
             package_ = (org.eclipse.uml2.uml.Package) EcoreUtil
                     .getObjectByType(resource.getContents(),
                             UMLPackage.Literals.PACKAGE);
