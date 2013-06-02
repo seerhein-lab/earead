@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="MKO_Bookstore" nsPrefix="MKO_Bookstore" nsURI="http://MKO_Bookstore/1.0">
+	<eClassifiers xsi:type="ecore:EClass" name="ETY_Author">
+		<eStructuralFeatures xsi:type="ecore:EAttribute" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" name="ATT_Author_Id" lowerBound="1" upperBound="1" defaultValueLiteral="" transient="false" derived="false" ordered="false" changeable="true"/>
+		<eStructuralFeatures xsi:type="ecore:EAttribute" name="ATT_Books" lowerBound="1" upperBound="1" defaultValueLiteral="" transient="false" derived="false" ordered="false" changeable="true"/>
+		<eStructuralFeatures xsi:type="ecore:EAttribute" name="ATT_Name" lowerBound="1" upperBound="1" defaultValueLiteral="" transient="false" derived="false" ordered="false" changeable="true"/>
+		<eStructuralFeatures xsi:type="ecore:EReference" ordered="false" upperBound="-1" eType="#//ETY_Book" containment="true" eOpposite="#//ETY_Book/@eStructuralFeatures.4"/>
+	</eClassifiers>
+	<eClassifiers xsi:type="ecore:EClass" name="ETY_Book">
+		<eStructuralFeatures xsi:type="ecore:EAttribute" name="ATT_Author_Id" lowerBound="1" upperBound="1" defaultValueLiteral="" transient="false" derived="false" ordered="false" changeable="true"/>
+		<eStructuralFeatures xsi:type="ecore:EAttribute" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" name="ATT_Book_Id" lowerBound="1" upperBound="1" defaultValueLiteral="" transient="false" derived="false" ordered="false" changeable="true"/>
+		<eStructuralFeatures xsi:type="ecore:EAttribute" name="ATT_Isbn" lowerBound="1" upperBound="1" defaultValueLiteral="" transient="false" derived="false" ordered="false" changeable="true"/>
+		<eStructuralFeatures xsi:type="ecore:EAttribute" name="ATT_Title" lowerBound="1" upperBound="1" defaultValueLiteral="" transient="false" derived="false" ordered="false" changeable="true"/>
+		<eStructuralFeatures xsi:type="ecore:EReference" ordered="false" lowerBound="1" eType="#//ETY_Author" eOpposite="#//ETY_Author/@eStructuralFeatures.3"/>
+	</eClassifiers>
+</ecore:EPackage>
