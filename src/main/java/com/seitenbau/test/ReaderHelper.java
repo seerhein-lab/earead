@@ -103,7 +103,7 @@ public abstract class ReaderHelper {
 		}
 	}
 
-	public static void writePackage(Package packageElement) {
+	public static void writePackage(Model packageElement) {
 		if (packageElement == null) {
 			System.out.println("Package is null.");
 			return;
