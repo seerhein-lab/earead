@@ -68,20 +68,19 @@ public abstract class WriterHelper {
 					// print attributes of entities.
 					for (Property property : entity.getAllAttributes()) {
 						if (property.getAssociation() != null) {
-							String relation = "\t\tAttribute for Association: ";
 							Association association = property.getAssociation();
-							System.out.println(relation);
+							System.out.println("\t\tAttribute for Association: ");
+							System.out.println("\t\t\tTarget: " + property.getType().getName());
 							
-//							EList<Property> allAttributes = association.getAllAttributes();
-//							System.out.println(allAttributes);
-//							EList<NamedElement> members = association.getMembers();
-//							System.out.println(members);
-//							EList<Element> ownedElements = association.getOwnedElements();
-//							System.out.println(ownedElements);
-//							EList<Property> ownedEnds = association.getOwnedEnds();
-//							System.out.println(ownedEnds);
-//							EList<NamedElement> ownedMembers = association.getOwnedMembers();
-//							System.out.println(ownedMembers);
+
+
+							for (Property test : association.getOwnedEnds()) {
+								System.out.println(test.getLower());
+								System.out.println(test.getUpper());
+								System.out.println("\t\t\tSource: " + test.getType().getName());
+								System.out.println("\t\t\tName: " + test.getName());
+							}
+							
 						} else {
 							String attribute = "\t\tAttribute: "
 									+ property.getName();
