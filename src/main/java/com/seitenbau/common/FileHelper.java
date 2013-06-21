@@ -38,4 +38,29 @@ public abstract class FileHelper {
 		LOG.debug(method + "End");
 		return file;
 	}
+
+	/**
+	 * Returns the xmi file of the given relative file path name.
+	 * 
+	 * @param filePath
+	 *            the relative file path name.
+	 * @return the file object.
+	 * @throws FileNotFoundException
+	 *             exception when file cannot be found.
+	 */
+	public static File getXmiFile(String filePath) throws FileNotFoundException {
+		String method = "getXmiFile(): ";
+		LOG.debug(method + "Start");
+
+		if (!filePath.endsWith(".xmi")) {
+			String msg = "File has no xmi extension: " + filePath;
+			LOG.error(method + msg);
+			throw new FileNotFoundException(msg);
+		}
+
+		File file = getFile(filePath);
+
+		LOG.debug(method + "End");
+		return file;
+	}
 }

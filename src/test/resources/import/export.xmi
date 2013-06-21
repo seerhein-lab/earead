@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<xmi:XMI xmi:version="2.1" xmlns:uml="http://schema.omg.org/spec/UML/2.1" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmlns:thecustomprofile="http://www.sparxsystems.com/profiles/thecustomprofile/1.0" xmlns:Datenmodell="http://www.sparxsystems.com/profiles/Datenmodell/1.0">
+	<xmi:Documentation exporter="Enterprise Architect" exporterVersion="6.5"/>
+	<uml:Model xmi:type="uml:Model" name="EA_Model" visibility="public">
+		<packagedElement xmi:type="uml:Package" xmi:id="EAPK_5EFB90E7_6831_405a_A275_C69A0D76A95D" name="MKO_Bookstore" visibility="public">
+			<packagedElement xmi:type="uml:Class" xmi:id="EAID_CC3B2BBA_6A98_4d3c_A542_A86949BB96F9" name="ETY_Author" visibility="public">
+				<ownedAttribute xmi:type="uml:Property" xmi:id="EAID_53AB4304_9FAE_4308_AB5E_EF15F3EA61ED" name="ATT_Author_Id" visibility="private" isStatic="false" isReadOnly="false" isDerived="false" isOrdered="false" isUnique="true" isDerivedUnion="false">
+					<type xmi:idref="EAJava_int"/>
+					<lowerValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000001_9FAE_4308_AB5E_EF15F3EA61ED" value="1"/>
+					<upperValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000002_9FAE_4308_AB5E_EF15F3EA61ED" value="1"/>
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property" xmi:id="EAID_D8F1386B_9B3B_44ae_82F2_1B502B72A1DB" name="ATT_Name" visibility="private" isStatic="false" isReadOnly="false" isDerived="false" isOrdered="false" isUnique="true" isDerivedUnion="false">
+					<type xmi:idref="EAJava_String"/>
+					<lowerValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000003_9B3B_44ae_82F2_1B502B72A1DB" value="1"/>
+					<upperValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000004_9B3B_44ae_82F2_1B502B72A1DB" value="1"/>
+				</ownedAttribute>
+			</packagedElement>
+			<packagedElement xmi:type="uml:Association" xmi:id="EAID_99B54C91_D1FD_4c06_9F81_056C44CDE317" visibility="public">
+				<memberEnd xmi:idref="EAID_dstB54C91_D1FD_4c06_9F81_056C44CDE317"/>
+				<memberEnd xmi:idref="EAID_srcB54C91_D1FD_4c06_9F81_056C44CDE317"/>
+				<ownedEnd xmi:type="uml:Property" xmi:id="EAID_srcB54C91_D1FD_4c06_9F81_056C44CDE317" name="ATT_Books" visibility="public" association="EAID_99B54C91_D1FD_4c06_9F81_056C44CDE317" isStatic="false" isReadOnly="false" isDerived="false" isOrdered="false" isUnique="true" isDerivedUnion="false" aggregation="composite">
+					<type xmi:idref="EAID_AFCDB1E2_2BF3_45ca_92DE_24B9F2884677"/>
+					<lowerValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000005__D1FD_4c06_9F81_056C44CDE317" value="0"/>
+					<upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="EAID_LI000006__D1FD_4c06_9F81_056C44CDE317" value="-1"/>
+				</ownedEnd>
+			</packagedElement>
+			<packagedElement xmi:type="uml:Class" xmi:id="EAID_AFCDB1E2_2BF3_45ca_92DE_24B9F2884677" name="ETY_Book" visibility="public">
+				<ownedAttribute xmi:type="uml:Property" xmi:id="EAID_B878F912_8305_492d_AD1C_BAE94A5C5B72" name="ATT_Book_Id" visibility="private" isStatic="false" isReadOnly="false" isDerived="false" isOrdered="false" isUnique="true" isDerivedUnion="false">
+					<type xmi:idref="EAJava_int"/>
+					<lowerValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000007_8305_492d_AD1C_BAE94A5C5B72" value="1"/>
+					<upperValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000008_8305_492d_AD1C_BAE94A5C5B72" value="1"/>
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property" xmi:id="EAID_3E4712CC_0CC6_47f7_8018_BC22817030DA" name="ATT_Isbn" visibility="private" isStatic="false" isReadOnly="false" isDerived="false" isOrdered="false" isUnique="true" isDerivedUnion="false">
+					<type xmi:idref="EAJava_String"/>
+					<lowerValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000009_0CC6_47f7_8018_BC22817030DA" value="1"/>
+					<upperValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000010_0CC6_47f7_8018_BC22817030DA" value="1"/>
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property" xmi:id="EAID_B9B6784C_871C_48cd_B702_3E6C03B13097" name="ATT_Title" visibility="private" isStatic="false" isReadOnly="false" isDerived="false" isOrdered="false" isUnique="true" isDerivedUnion="false">
+					<type xmi:idref="EAJava_String"/>
+					<lowerValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000011_871C_48cd_B702_3E6C03B13097" value="1"/>
+					<upperValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000012_871C_48cd_B702_3E6C03B13097" value="1"/>
+				</ownedAttribute>
+				<ownedAttribute xmi:type="uml:Property" xmi:id="EAID_dstB54C91_D1FD_4c06_9F81_056C44CDE317" visibility="public" association="EAID_99B54C91_D1FD_4c06_9F81_056C44CDE317" isStatic="false" isReadOnly="false" isDerived="false" isOrdered="false" isUnique="true" isDerivedUnion="false" aggregation="none">
+					<type xmi:idref="EAID_CC3B2BBA_6A98_4d3c_A542_A86949BB96F9"/>
+					<lowerValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000013__D1FD_4c06_9F81_056C44CDE317" value="1"/>
+					<upperValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000014__D1FD_4c06_9F81_056C44CDE317" value="1"/>
+				</ownedAttribute>
+			</packagedElement>
+		</packagedElement>
+		<Datenmodell:Entitätstyp base_Class="EAID_CC3B2BBA_6A98_4d3c_A542_A86949BB96F9" Persistenz="persistent"/>
+		<thecustomprofile:Schlüsselattribut base_Attribute="EAID_53AB4304_9FAE_4308_AB5E_EF15F3EA61ED"/>
+		<Datenmodell:IstTeilVon base_Aggregation="EAID_99B54C91_D1FD_4c06_9F81_056C44CDE317"/>
+		<Datenmodell:Entitätstyp base_Class="EAID_AFCDB1E2_2BF3_45ca_92DE_24B9F2884677" Persistenz="persistent"/>
+		<thecustomprofile:Schlüsselattribut base_Attribute="EAID_B878F912_8305_492d_AD1C_BAE94A5C5B72"/>
+	</uml:Model>
+</xmi:XMI>
