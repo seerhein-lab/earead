@@ -62,5 +62,23 @@
 				</packagedElement>
 			</packagedElement>
 		</primitivetypes>
+		<profiles>
+			<uml:Profile xmi:version="2.1" xmlns:uml="http://schema.omg.org/spec/UML/2.1/" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmi:id="thecustomprofile" nsPrefix="thecustomprofile" name="thecustomprofile" metamodelReference="mmref01">
+				<ownedComment xmi:type="uml:Comment" xmi:id="comment01" annotatedElement="thecustomprofile">
+					<body> Version:1.0</body>
+				</ownedComment>
+				<packageImport xmi:id="mmref01">
+					<importedPackage href="http://schema.omg.org/spec/UML/2.1/"/>
+				</packageImport>
+				<packagedElement xmi:type="uml:Stereotype" xmi:id="Schlüsselattribut" name="Schlüsselattribut">
+					<ownedAttribute xmi:type="uml:Property" xmi:id="Schlüsselattribut-base_Attribute" name="base_Attribute" association="Attribute_Schlüsselattribut">
+						<type href="http://schema.omg.org/spec/UML/2.1/#Attribute"/>
+					</ownedAttribute>
+				</packagedElement>
+				<packagedElement xmi:type="uml:Extension" xmi:id="Attribute_Schlüsselattribut" name="A_Attribute_Schlüsselattribut" memberEnd="extension_Schlüsselattribut Schlüsselattribut-base_Attribute">
+					<ownedEnd xmi:id="extension_Schlüsselattribut" name="extension_Schlüsselattribut" type="Schlüsselattribut" isComposite="true" lower="0" upper="1" memberEnd="extension_Schlüsselattribut Schlüsselattribut-base_Attribute"/>
+				</packagedElement>
+			</uml:Profile>
+		</profiles>
 	</xmi:Extension>
 </xmi:XMI>
