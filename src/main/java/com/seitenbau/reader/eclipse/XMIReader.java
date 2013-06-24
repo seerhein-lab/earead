@@ -7,6 +7,8 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EPackage.Registry;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
@@ -56,6 +58,14 @@ public abstract class XMIReader {
 		ResourceSet resource = initResourceSet();
 		Model model = UML2Util.load(resource, uri, UMLPackage.Literals.MODEL);
 
+		for (Resource uMLResourceImpl : resource.getResources()) {
+			StringBuffer errorMsg = new StringBuffer("ERROR reading Model:\n");
+			for (Diagnostic error : uMLResourceImpl.getErrors()) {
+				errorMsg.append("Line "+ error.getLine() + ": " + error.getMessage() + "\n");
+			}
+			System.out.println(method + errorMsg);
+			LOG.error(method + errorMsg);
+		}
 		LOG.debug(method + "End");
 		return model;
 	}
