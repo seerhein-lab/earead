@@ -15,7 +15,7 @@ import org.eclipse.uml2.uml.Type;
  */
 public abstract class WriterHelper {
 
-	public static void writePackage(Model modelObject) {
+	public static void writeModel(Model modelObject) {
 		if (modelObject == null) {
 			System.out.println("Model is null.");
 			return;
