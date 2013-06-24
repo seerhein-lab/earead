@@ -59,12 +59,16 @@ public abstract class XMIReader {
 		Model model = UML2Util.load(resource, uri, UMLPackage.Literals.MODEL);
 
 		for (Resource uMLResourceImpl : resource.getResources()) {
-			StringBuffer errorMsg = new StringBuffer("ERROR reading Model:\n");
-			for (Diagnostic error : uMLResourceImpl.getErrors()) {
-				errorMsg.append("Line "+ error.getLine() + ": " + error.getMessage() + "\n");
+			if (!uMLResourceImpl.getErrors().isEmpty()) {
+				StringBuffer errorMsg = new StringBuffer(
+						"ERROR reading Model:\n");
+				for (Diagnostic error : uMLResourceImpl.getErrors()) {
+					errorMsg.append("Line " + error.getLine() + ": "
+							+ error.getMessage() + "\n");
+				}
+				System.out.println(method + errorMsg);
+				LOG.error(method + errorMsg);
 			}
-			System.out.println(method + errorMsg);
-			LOG.error(method + errorMsg);
 		}
 		LOG.debug(method + "End");
 		return model;
