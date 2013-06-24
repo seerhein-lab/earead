@@ -12,8 +12,7 @@ public class XmiReaderTest {
 
 		String filePath = "src/test/resources/import/export_transformed.xmi";
 		Model model = XMIReader.readUmlModel(filePath);
-
-		// WriterHelper.writeModel(model);
+		
 		WriterHelper.writePackage(model);
 	}
 
