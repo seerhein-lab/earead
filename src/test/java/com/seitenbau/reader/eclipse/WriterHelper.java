@@ -52,6 +52,7 @@ public abstract class WriterHelper {
 							if (type != null) {
 								attribute += ":" + type.getName();
 							}
+							attribute += " (" + property.isID() + ")";
 							System.out.println(attribute);
 						}
 					}

@@ -4,7 +4,7 @@
 	<uml:Model xmi:type="uml:Model" name="EA_Model" visibility="public">
 		<packagedElement xmi:type="uml:Package" xmi:id="EAPK_5EFB90E7_6831_405a_A275_C69A0D76A95D" name="MKO_Bookstore" visibility="public">
 			<packagedElement xmi:type="uml:Class" xmi:id="EAID_CC3B2BBA_6A98_4d3c_A542_A86949BB96F9" name="ETY_Author" visibility="public">
-				<ownedAttribute xmi:type="uml:Property" xmi:id="EAID_53AB4304_9FAE_4308_AB5E_EF15F3EA61ED" name="ATT_Author_Id" visibility="private" isStatic="false" isReadOnly="false" isDerived="false" isOrdered="false" isUnique="true" isDerivedUnion="false">
+				<ownedAttribute xmi:type="uml:Property" isID="true" xmi:id="EAID_53AB4304_9FAE_4308_AB5E_EF15F3EA61ED" name="ATT_Author_Id" visibility="private" isStatic="false" isReadOnly="false" isDerived="false" isOrdered="false" isUnique="true" isDerivedUnion="false">
 					<type xmi:idref="EAJava_int"/>
 					<lowerValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000001_9FAE_4308_AB5E_EF15F3EA61ED" value="1"/>
 					<upperValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000002_9FAE_4308_AB5E_EF15F3EA61ED" value="1"/>
@@ -25,7 +25,7 @@
 				</ownedEnd>
 			</packagedElement>
 			<packagedElement xmi:type="uml:Class" xmi:id="EAID_AFCDB1E2_2BF3_45ca_92DE_24B9F2884677" name="ETY_Book" visibility="public">
-				<ownedAttribute xmi:type="uml:Property" xmi:id="EAID_B878F912_8305_492d_AD1C_BAE94A5C5B72" name="ATT_Book_Id" visibility="private" isStatic="false" isReadOnly="false" isDerived="false" isOrdered="false" isUnique="true" isDerivedUnion="false">
+				<ownedAttribute xmi:type="uml:Property" isID="true" xmi:id="EAID_B878F912_8305_492d_AD1C_BAE94A5C5B72" name="ATT_Book_Id" visibility="private" isStatic="false" isReadOnly="false" isDerived="false" isOrdered="false" isUnique="true" isDerivedUnion="false">
 					<type xmi:idref="EAJava_int"/>
 					<lowerValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000007_8305_492d_AD1C_BAE94A5C5B72" value="1"/>
 					<upperValue xmi:type="uml:LiteralInteger" xmi:id="EAID_LI000008_8305_492d_AD1C_BAE94A5C5B72" value="1"/>
@@ -62,23 +62,5 @@
 				</packagedElement>
 			</packagedElement>
 		</primitivetypes>
-		<profiles>
-			<uml:Profile xmi:version="2.1" xmlns:uml="http://schema.omg.org/spec/UML/2.1/" xmlns:xmi="http://schema.omg.org/spec/XMI/2.1" xmi:id="thecustomprofile" nsPrefix="thecustomprofile" name="thecustomprofile" metamodelReference="mmref01">
-				<ownedComment xmi:type="uml:Comment" xmi:id="comment01" annotatedElement="thecustomprofile">
-					<body> Version:1.0</body>
-				</ownedComment>
-				<packageImport xmi:id="mmref01">
-					<importedPackage href="http://schema.omg.org/spec/UML/2.1/"/>
-				</packageImport>
-				<packagedElement xmi:type="uml:Stereotype" xmi:id="Schlüsselattribut" name="Schlüsselattribut">
-					<ownedAttribute xmi:type="uml:Property" xmi:id="Schlüsselattribut-base_Attribute" name="base_Attribute" association="Attribute_Schlüsselattribut">
-						<type href="http://schema.omg.org/spec/UML/2.1/#Attribute"/>
-					</ownedAttribute>
-				</packagedElement>
-				<packagedElement xmi:type="uml:Extension" xmi:id="Attribute_Schlüsselattribut" name="A_Attribute_Schlüsselattribut" memberEnd="extension_Schlüsselattribut Schlüsselattribut-base_Attribute">
-					<ownedEnd xmi:id="extension_Schlüsselattribut" name="extension_Schlüsselattribut" type="Schlüsselattribut" isComposite="true" lower="0" upper="1" memberEnd="extension_Schlüsselattribut Schlüsselattribut-base_Attribute"/>
-				</packagedElement>
-			</uml:Profile>
-		</profiles>
 	</xmi:Extension>
 </xmi:XMI>
