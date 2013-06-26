@@ -1,13 +1,10 @@
-package com.seitenbau;
+package com.seitenbau.mapper;
 
-import java.io.File;
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.JAXBException;
-
+import org.apache.log4j.Logger;
 import org.apache.torque.ColumnType;
 import org.apache.torque.DatabaseType;
 import org.apache.torque.ForeignKeyType;
@@ -23,34 +20,26 @@ import org.eclipse.uml2.uml.Package;
 import org.eclipse.uml2.uml.Property;
 import org.eclipse.uml2.uml.Type;
 
-import com.seitenbau.common.FileHelper;
-import com.seitenbau.reader.eclipse.XMIReader;
-import com.seitenbau.writer.torque.DatamodelWriter;
+/**
+ * This class maps a UML model (using the eclipse libraries ecore und uml from
+ * EMF project) to the Apache Torque schema object.
+ * 
+ * @author nkunstek
+ */
+public abstract class XMI2TorqueMapper {
 
-public class DatamodelCreator {
+	/** The logger. */
+	private static final Logger LOG = Logger.getLogger(XMI2TorqueMapper.class);
 
-	public static void main(String[] args) throws ClassNotFoundException,
-			IOException, JAXBException {
-
-		String path = "src/test/resources/import/";
-		String sourceFile = path + "export_all_transformed.xmi";
-		String targetFile = path + "torque-schema.xml";
-		File resultFile = new File(targetFile);
-		
-
-		File xmiFile = FileHelper.getXmiFile(sourceFile);
-
-		Model model = XMIReader.readUmlModel(xmiFile);
-
-		DatabaseType database = mapModel(model);
-
-		DatamodelWriter.writeDatamodel(database, resultFile);
-
-		System.out.println(FileHelper.getContents(resultFile));
-	}
-
-	private static DatabaseType mapModel(Model modelObject)
-			throws JAXBException, IOException {
+	/**
+	 * Maps the UML model (using the eclipse libraries ecore und uml from EMF
+	 * project) to a Apache Torque schema object.
+	 * 
+	 * @param modelObject
+	 *            UML model to mao
+	 * @return the Apache Torque schema object.
+	 */
+	public static DatabaseType mapUmlModel(Model modelObject) {
 
 		DatabaseType database = new DatabaseType();
 		database.setDefaultIdMethod(IdMethodType.NATIVE);
@@ -58,7 +47,7 @@ public class DatamodelCreator {
 		List<TableType> tableList = new ArrayList<TableType>();
 
 		if (modelObject == null) {
-			System.out.println("Model is null.");
+			LOG.warn("Model is null.");
 			return database;
 		}
 
@@ -142,7 +131,7 @@ public class DatamodelCreator {
 				} else if (element instanceof Association) {
 					// this case is handled via attribute of a class element
 				} else {
-					System.err.println(element.toString());
+					LOG.error(element.toString());
 				}
 			}
 		}
