@@ -65,6 +65,16 @@ public abstract class XMIReader {
 				System.out.println(method + errorMsg);
 				LOG.error(method + errorMsg);
 			}
+			if (!uMLResourceImpl.getWarnings().isEmpty()) {
+				StringBuffer warningMsg = new StringBuffer(
+						"WARN reading Model:\n");
+				for (Diagnostic warning : uMLResourceImpl.getWarnings()) {
+					warningMsg.append("Line " + warning.getLine() + ": "
+							+ warning.getMessage() + "\n");
+				}
+				System.out.println(method + warningMsg);
+				LOG.warn(method + warningMsg);
+			}
 		}
 		LOG.debug(method + "End");
 		return model;
