@@ -18,8 +18,6 @@ import org.eclipse.uml2.uml.UMLPackage;
 import org.eclipse.uml2.uml.internal.resource.UMLResourceFactoryImpl;
 import org.eclipse.uml2.uml.resource.XMI2UMLResource;
 
-import com.seitenbau.common.FileHelper;
-
 /**
  * This class offers methods for reading UML models in xmi files using the
  * eclipse libraries ecore und uml from EMF project.
@@ -41,19 +39,17 @@ public abstract class XMIReader {
 	 * Reads the UML model from the given xmi file (Version 2.1) using the
 	 * eclipse libraries ecore und uml from EMF project.
 	 * 
-	 * @param filePath
-	 *            Relative path to the xmi file.
+	 * @param xmiFile
+	 *            Xmi file, not null.
 	 * @return the UML model.
 	 * @throws FileNotFoundException
 	 *             File was not found.
 	 */
-	public static Model readUmlModel(String filePath)
-			throws FileNotFoundException {
+	public static Model readUmlModel(File xmiFile) throws FileNotFoundException {
 		String method = "readUmlModel(): ";
 		LOG.debug(method + "Start");
 
-		LOG.info("Read UML model from xmi file: " + filePath);
-		File xmiFile = FileHelper.getXmiFile(filePath);
+		LOG.info("Read UML model from xmi file: " + xmiFile);
 		URI uri = URI.createURI(xmiFile.getPath());
 		ResourceSet resource = initResourceSet();
 		Model model = UML2Util.load(resource, uri, UMLPackage.Literals.MODEL);

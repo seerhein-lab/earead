@@ -1,18 +1,19 @@
 package com.seitenbau.writer.torque;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
 
 import org.apache.torque.ColumnType;
 import org.apache.torque.DatabaseType;
 import org.apache.torque.IdMethodType;
 import org.apache.torque.SqlDataType;
 import org.apache.torque.TableType;
+
+import com.seitenbau.common.FileHelper;
 
 public class TorqueWriterTest {
 
@@ -40,13 +41,10 @@ public class TorqueWriterTest {
 		tableList.add(bookTable);
 		database.setTable(tableList);
 
-		// create JAXB context and instantiate marshaller
-		JAXBContext context = JAXBContext.newInstance(DatabaseType.class);
-		Marshaller m = context.createMarshaller();
-		m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+		File file = new File("target/torque-schema.xml");
+		DatamodelWriter.writeDatamodel(database, file);
 
-		// Write to System.out
-		m.marshal(database, System.out);
+		System.out.println(FileHelper.getContents(file));
 	}
 
 }
