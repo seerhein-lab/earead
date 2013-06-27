@@ -27,6 +27,6 @@ public class DatamodelCreatorTest {
 		Model model = XMIReader.readUmlModel(xmiFile);
 		DatabaseType database = XMI2TorqueMapper.mapUmlModel(model);
 		DatamodelWriter.writeDatamodel(database, resultFile);
-		System.out.println(FileHelper.getContents(resultFile));
+		System.out.println("\n" + FileHelper.getContents(resultFile));
 	}
 }
