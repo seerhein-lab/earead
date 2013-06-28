@@ -17,7 +17,7 @@ public class DatamodelCreatorTest {
 
 		// transform Enterprise Architecture file
 		File xmiFile = FileHelper
-				.getXmiFile("src/test/java/com/seitenbau/test.xmi");
+				.getXmiFile("src/test/resources/import/export.xmi");
 		File typesFile = FileHelper
 				.getXmiFile("src/main/resources/import/ea_extension_primitivetypes.xmi");
 		File transformedFile = XmiTransformer.transform(xmiFile, typesFile);
@@ -31,7 +31,7 @@ public class DatamodelCreatorTest {
 
 		// write Torque file
 		File resultFile = new File(
-				"src/test/resources/import/torque-schema.xml");
+				"target/torque-schema.xml");
 		DatamodelWriter.writeDatamodel(database, resultFile);
 		System.out.println("\n" + FileHelper.getContents(resultFile));
 	}

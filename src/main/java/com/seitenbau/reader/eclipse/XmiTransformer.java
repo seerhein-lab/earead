@@ -31,6 +31,8 @@ public abstract class XmiTransformer {
 	/** The logger. */
 	private static final Logger LOG = Logger.getLogger(XmiTransformer.class);
 
+	private static final String TARGET_FILE_PATH = "target/transformed.xmi";
+
 	private final static String EA_ELEMENT_PRIMARY_KEY = "thecustomprofile:Schlüsselattribut";
 	private final static String EA_ATTRIBUT_BASE = "base_Attribute";
 
@@ -38,34 +40,40 @@ public abstract class XmiTransformer {
 	private final static String XMI_ATTR_ID = "xmi:id";
 	private final static String XMI_ATTR_IS_ID = "isID";
 
-	public static File transform(File eaXmiFile,File typesFile) {
+	/**
+	 * Transforms an Enterprise Architect UML xmi file into an eclipse readable
+	 * xmi file (EMF project).
+	 * 
+	 * @param eaXmiFile
+	 *            the Enterprise Architect UML xmi file to transform.
+	 * @param primitivetypesFile
+	 *            Adding the primitive Types to the transformed file.
+	 * @return an eclipse readable xmi file (EMF project)
+	 */
+	public static File transform(File eaXmiFile, File primitivetypesFile) {
+		String method = "transform(): ";
+		LOG.debug(method + "Start");
+
 		try {
 			Document doc = parseDocument(eaXmiFile);
-			Document typesDoc = parseDocument(typesFile);
-			
-			addPrimitiveTypes(doc, typesDoc);
+			Document primitivetypesDoc = parseDocument(primitivetypesFile);
+
+			appendPrimitiveTypes(doc, primitivetypesDoc);
 			transformPrimaryKeys(doc);
 
-			// initialize StreamResult with File object to save to file
-			String parentPath = eaXmiFile.getParent();
-			File transformedFile = new File(parentPath + "/transformed.xmi");
+			File transformedFile = new File(TARGET_FILE_PATH);
 			writeTransformedFile(doc, transformedFile);
+
+			LOG.debug(method + "End");
 			return transformedFile;
-
-		}  catch (SAXException e) {
-			Exception x = e.getException();
-			((x == null) ? e : x).printStackTrace();
-
-		} catch (Throwable t) {
-			t.printStackTrace();
+		} catch (Exception e) {
+			String msg = method + e.getMessage();
+			System.out.println(msg);
+			LOG.error(msg);
 		}
-		return null;
-	}
 
-	private static void addPrimitiveTypes(Document docToAdd, Document typesFile) {		
-		Element root = docToAdd.getDocumentElement();
-		Node newChild = docToAdd.importNode(typesFile.getDocumentElement(), true);
-		root.appendChild(newChild);
+		LOG.debug(method + "End");
+		return null;
 	}
 
 	/**
@@ -93,6 +101,28 @@ public abstract class XmiTransformer {
 
 		LOG.debug(method + "End");
 		return doc;
+	}
+
+	/**
+	 * Adding the primitive types into the given document in the extension
+	 * section.
+	 * 
+	 * @param docToAdd
+	 *            the xmi document to add the primitive typs.
+	 * @param primitivetypesDoc
+	 *            the primitive types.
+	 */
+	private static void appendPrimitiveTypes(Document docToAdd,
+			Document primitivetypesDoc) {
+		String method = "appendPrimitiveTypes(): ";
+		LOG.debug(method + "Start");
+
+		Element root = docToAdd.getDocumentElement();
+		Node newChild = docToAdd.importNode(
+				primitivetypesDoc.getDocumentElement(), true);
+		root.appendChild(newChild);
+
+		LOG.debug(method + "End");
 	}
 
 	/**

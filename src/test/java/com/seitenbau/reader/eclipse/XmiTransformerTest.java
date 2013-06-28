@@ -1,4 +1,4 @@
-package com.seitenbau;
+package com.seitenbau.reader.eclipse;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,12 +15,9 @@ import com.seitenbau.reader.eclipse.XmiTransformer;
 public abstract class XmiTransformerTest {
 	
 	public static void main(String args[]) throws FileNotFoundException {
-
-		// String path = "src/test/resources/import/";
-		String path = "src/test/java/com/seitenbau/";
-		String sourceFile = path + "test.xmi";
+		
+		String sourceFile = "src/test/resources/import/export.xmi";
 		File xmiFile = FileHelper.getXmiFile(sourceFile);
-
 		String typesFilePath = "src/main/resources/import/ea_extension_primitivetypes.xmi";
 		File typesFile = FileHelper.getXmiFile(typesFilePath);
 
