@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<xmi:Extension extender="Enterprise Architect" extenderID="6.5">
+	<primitivetypes>
+		<packagedElement xmi:type="uml:Package" xmi:id="EAPrimitiveTypesPackage" name="EA_PrimitiveTypes_Package" visibility="public">
+			<packagedElement xmi:type="uml:Package" xmi:id="EAJavaTypesPackage" name="EA_Java_Types_Package" visibility="public">
+				<packagedElement xmi:type="uml:PrimitiveType" xmi:id="EAJava_int" name="int" visibility="public"/>
+				<packagedElement xmi:type="uml:PrimitiveType" xmi:id="EAJava_String" name="String" visibility="public"/>
+			</packagedElement>
+		</packagedElement>
+	</primitivetypes>
+</xmi:Extension>
