@@ -10,7 +10,7 @@ import org.eclipse.uml2.uml.Model;
 
 import com.seitenbau.common.FileHelper;
 import com.seitenbau.mapper.XMI2TorqueMapper;
-import com.seitenbau.reader.eclipse.XMIReader;
+import com.seitenbau.reader.eclipse.XmiReader;
 import com.seitenbau.writer.torque.DatamodelWriter;
 
 public class DatamodelCreatorTest {
@@ -24,7 +24,7 @@ public class DatamodelCreatorTest {
 		File resultFile = new File(targetFile);
 
 		File xmiFile = FileHelper.getXmiFile(sourceFile);
-		Model model = XMIReader.readUmlModel(xmiFile);
+		Model model = XmiReader.readUmlModel(xmiFile);
 		DatabaseType database = XMI2TorqueMapper.mapUmlModel(model);
 		DatamodelWriter.writeDatamodel(database, resultFile);
 		System.out.println("\n" + FileHelper.getContents(resultFile));

@@ -24,10 +24,10 @@ import org.eclipse.uml2.uml.resource.XMI2UMLResource;
  * 
  * @author nkunstek
  */
-public abstract class XMIReader {
+public abstract class XmiReader {
 
 	/** The logger. */
-	private static final Logger LOG = Logger.getLogger(XMIReader.class);
+	private static final Logger LOG = Logger.getLogger(XmiReader.class);
 
 	/** The XMI version. */
 	private static final String XMI_VERSION = "2.1";

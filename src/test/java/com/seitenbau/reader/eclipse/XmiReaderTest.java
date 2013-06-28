@@ -22,7 +22,7 @@ public class XmiReaderTest {
 		String filePath = "src/test/resources/import/export_transformed.xmi";
 		File xmiFile = FileHelper.getXmiFile(filePath);
 
-		Model model = XMIReader.readUmlModel(xmiFile);
+		Model model = XmiReader.readUmlModel(xmiFile);
 		writeModel(model);
 	}
 	
