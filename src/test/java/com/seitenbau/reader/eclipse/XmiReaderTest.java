@@ -3,6 +3,7 @@ package com.seitenbau.reader.eclipse;
 import java.io.File;
 import java.io.IOException;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.uml2.uml.Association;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Element;
@@ -20,6 +21,7 @@ public class XmiReaderTest {
 			IOException {
 
 		String filePath = "src/test/resources/import/export_transformed.xmi";
+		//String filePath = "src/test/resources/import/associationTest_all_transformed.xmi";
 		File xmiFile = FileHelper.getXmiFile(filePath);
 
 		Model model = XmiReader.readUmlModel(xmiFile);
@@ -69,6 +71,42 @@ public class XmiReaderTest {
 					}
 				} else if (element instanceof Association) {
 					// this case is handled via attribute of a class element
+					Association associationObject = (Association) element;
+					
+					//General information about association
+					System.out.println("\tAssociation:");
+					EList<Property> ownedEnds = associationObject.getOwnedEnds();
+					if (ownedEnds.size() > 0) {
+						System.out.println("\t\tName: " + associationObject.getOwnedEnds().get(0).getName());
+					}
+					
+					EList<Property> memberEnds = associationObject.getMemberEnds();
+					EList<Type> endTypes = associationObject.getEndTypes();
+					
+					if (memberEnds.size() > 0) {
+						//get source type and properties
+						Type sourceType = endTypes.get(0);
+						Property source = memberEnds.get(0);
+						
+						//Source properties
+						System.out.println("\t\tSource:");
+						System.out.println("\t\t\tSource: " + sourceType.getName());
+						System.out.println("\t\t\tSource Lower: " + source.getLower());
+						System.out.println("\t\t\tSource Upper: " + source.getUpper());
+					}
+					
+					if (memberEnds.size() > 0) {
+						//get target type and properties
+						Type targetType = endTypes.get(1);
+						Property targetValues = memberEnds.get(0).getOtherEnd();
+
+						//Target properties
+						System.out.println("\t\tTarget:");
+						System.out.println("\t\t\tTarget: " + targetType.getName());
+						System.out.println("\t\t\tTarget Lower: " + targetValues.getLower());
+						System.out.println("\t\t\tTarget Upper: " + targetValues.getUpper());
+					}
+
 				} else {
 					System.err.println(element.toString());
 				}
