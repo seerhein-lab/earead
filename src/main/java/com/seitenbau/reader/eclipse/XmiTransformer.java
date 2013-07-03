@@ -35,6 +35,7 @@ public abstract class XmiTransformer {
 
 	private final static String EA_ELEMENT_PRIMARY_KEY = "thecustomprofile:Schlüsselattribut";
 	private final static String EA_ATTRIBUT_BASE = "base_Attribute";
+	private final static String EA_PROPERTY_BASE = "base_Property";
 
 	private final static String XMI_ELEMENT_OWNED_ATTRIBUTE = "ownedAttribute";
 	private final static String XMI_ATTR_ID = "xmi:id";
@@ -142,6 +143,9 @@ public abstract class XmiTransformer {
 			Element primaryKey = (Element) primaryKeysEA.item(i);
 
 			String xmiId = primaryKey.getAttribute(EA_ATTRIBUT_BASE);
+			if (xmiId.equals("")) {
+				xmiId = primaryKey.getAttribute(EA_PROPERTY_BASE);
+			}
 			Element primaryKeyElement = getClassAttributeByXmiId(doc, xmiId);
 			primaryKeyElement.setAttribute(XMI_ATTR_IS_ID,
 					Boolean.TRUE.toString());
