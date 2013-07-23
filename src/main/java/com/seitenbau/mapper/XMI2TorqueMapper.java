@@ -12,6 +12,7 @@ import org.apache.torque.IdMethodType;
 import org.apache.torque.ReferenceType;
 import org.apache.torque.SqlDataType;
 import org.apache.torque.TableType;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.uml2.uml.Association;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Element;
@@ -69,6 +70,19 @@ public abstract class XMI2TorqueMapper {
 				}
 			}
 		}
+		
+		//neu
+		for (Package packageObject : modelObject.getNestedPackages()) {
+			database.setName(packageObject.getName());
+
+			for (Element element : packageObject.getOwnedElements()) {
+				if (element instanceof Association) {
+					mapAssociation(element, tableList);
+				}
+			}
+		}
+		//
+		
 		database.setTable(tableList);
 
 		LOG.debug(method + "End");
@@ -143,9 +157,9 @@ public abstract class XMI2TorqueMapper {
 			// + associationProperty.getUpper());
 
 			ReferenceType referenceType = new ReferenceType();
-			// TODO FremdschlÃ¼ssel verwenden und nicht das Objekt
+			// TODO Fremdschlüssel verwenden und nicht das Objekt
 			referenceType.setForeign(propertyObject.getType().getName());
-			// TODO FremdschlÃ¼ssel verwenden und nicht das Objekt
+			// TODO Fremdschlüssel verwenden und nicht das Objekt
 			referenceType.setLocal(associationProperty.getType().getName());
 			referenceTypeList.add(referenceType);
 
@@ -209,5 +223,145 @@ public abstract class XMI2TorqueMapper {
 		}
 		return SqlDataType.VARCHAR;
 
+	}
+	
+	/**
+	 * Maps the UML associations to Apache Torque Foreign Keys for the specific Table Types.
+	 * Supported association types: 1 - 1, 1 - 1..*, 1 - 0..1, 1 - 0..* and vice versa.
+	 * 
+	 * @param element the UML association element.
+	 * @param tables List of existing tables to map specific foreign keys.
+	 */
+	private static void mapAssociation(Element element, List<TableType> tables) {
+		String method = "mapAssociation(): ";
+		LOG.debug(method + "Start");
+		
+		Association associationObject = (Association) element;
+		List<TableType> tableList = tables;
+		
+		EList<Property> memberEnds = associationObject.getMemberEnds();
+		EList<Type> endTypes = associationObject.getEndTypes();
+		
+		int sourceLower = 0;
+		int sourceUpper = 0;
+		int targetLower = 0;
+		int targetUpper = 0;
+		String sourceName = null;
+		String targetName = null;
+		
+		if (memberEnds.size() > 0) {
+			//get source type and properties
+			Type sourceType = endTypes.get(0);
+			Property source = memberEnds.get(0);
+			sourceName = sourceType.getName();
+			sourceLower = source.getLower();
+			sourceUpper = source.getUpper();
+
+			//get target type and properties
+			Type targetType = endTypes.get(1);
+			Property targetValues = memberEnds.get(0).getOtherEnd();
+			targetName = targetType.getName();
+			targetLower = targetValues.getLower();
+			targetUpper = targetValues.getUpper();
+
+		}
+		
+		switch (sourceLower) {
+			case 0: 
+				switch (sourceUpper) {
+					case 0: 
+						// error
+						System.err.println("Error 0..0");
+						break;
+						
+					case 1:
+						// source: 0..1
+						// target should only be 1
+						if (targetLower == 1 && targetUpper == 1) {
+							// 0..1 - 1
+							System.err.println("Assoziation: " + sourceName + " 0..1 - 1 " + targetName);
+						} else {
+							System.err.println("Error: only 1 - 0..1");
+						}
+						break;
+						
+					case -1: 
+						// source: 0..n
+						// target should only be 1
+						if (targetLower == 1 && targetUpper == 1) {
+							//0..* - 1
+							System.err.println("Assoziation: " + sourceName	+ " 0..* - 1 " + targetName);
+						} else {
+							System.err.println("Error: only 1 - 0..*");
+						}
+						break;
+				}
+				
+				break;
+
+			case 1: 
+				switch (sourceUpper) {
+					case 1:
+						// source 1
+						// target can be 1, 1..n, n, 0..1, 0..n
+						switch (targetLower) {
+							case 0:
+								if (targetUpper == 1) {
+									// 1 - 0..1
+									System.err.println("Assoziation: " + sourceName	+ " 1 - 0..1 " + targetName);
+								} else if (targetUpper == -1) {
+									// 1 - 0..*
+									System.err.println("Assoziation: " + sourceName	+ " 1 - 0..* " + targetName);
+								} else {
+									System.err.println("Error: only 1 - 0..1 or 1 - 0..* or 1 - 1 or 1 - 1..*");
+								}
+								
+								break;
+								
+							case 1:
+								if (targetUpper == 1) {
+									// 1 - 1
+									System.err.println("Assoziation: " + sourceName	+ " 1 - 1 " + targetName);
+								} else if (targetUpper == -1) {
+									// 1 - 1..*
+									System.err.println("Assoziation: " + sourceName	+ " 1 - 1..* " + targetName);
+								} else {
+									System.err.println("Error: only 1 - 0..1 or 1 - 0..* or 1 - 1 or 1 - 1..*");
+								}
+								
+								break;
+							default:
+								System.err.println("Error: only 1 - 0..1 or 1 - 0..* or 1 - 1 or 1 - 1..*");
+						}
+
+						break;
+						
+					case -1: 
+						// source 1..n
+						// target should only be 1
+						if (targetLower == 1 && targetUpper == 1) {
+							// 1..* - 1
+							System.err.println("Assoziation: " + sourceName + " 1..* - 1 " + targetName);
+						} else {
+							System.err.println("Error: only 1..* - 1");
+						}
+						break;
+				}
+				
+				break;
+				
+			case -1: 
+				// source n
+				// target should only be 1
+				if (targetLower == 1 && targetUpper == 1) {
+					// * - 1
+					System.err.println("Assoziation: " + sourceName + " * - 1 " + targetName);
+				} else {
+					System.err.println("Error: only * - 1");
+				}
+				break;
+		}
+		
+		LOG.debug(method + "End");
 	}
 }
