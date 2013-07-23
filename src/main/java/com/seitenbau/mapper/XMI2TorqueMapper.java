@@ -112,10 +112,10 @@ public abstract class XMI2TorqueMapper {
 			if (property.getAssociation() == null) {
 				ColumnType column = mapUmlProperty(property);
 				columnList.add(column);
-			} else {
-				ForeignKeyType foreignKey = mapUmlAssociation(property);
-				foreignKeyList.add(foreignKey);
-			}
+			} //else {
+				//ForeignKeyType foreignKey = mapUmlAssociation(property);
+				//foreignKeyList.add(foreignKey);
+			//}
 		}
 
 		table.setColumn(columnList);
