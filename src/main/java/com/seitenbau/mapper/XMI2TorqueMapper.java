@@ -266,8 +266,14 @@ public abstract class XMI2TorqueMapper {
 
 		}
 		
+		ForeignKeyType foreignKey = new ForeignKeyType();
+		ReferenceType referenceType = new ReferenceType();
+		List<Serializable> foreignKeyList = new ArrayList<Serializable>();
+		List<ReferenceType> referenceTypeList = new ArrayList<ReferenceType>();
+		
 		switch (sourceLower) {
 			case 0: 
+				
 				switch (sourceUpper) {
 					case 0: 
 						// error
@@ -296,6 +302,10 @@ public abstract class XMI2TorqueMapper {
 						}
 						break;
 				}
+				
+				foreignKey.setForeignTable(targetName);
+				referenceType.setForeign(targetName);
+				referenceType.setLocal(sourceName);
 				
 				break;
 
@@ -333,6 +343,10 @@ public abstract class XMI2TorqueMapper {
 							default:
 								System.err.println("Error: only 1 - 0..1 or 1 - 0..* or 1 - 1 or 1 - 1..*");
 						}
+						
+						foreignKey.setForeignTable(sourceName);
+						referenceType.setForeign(sourceName);
+						referenceType.setLocal(targetName);
 
 						break;
 						
@@ -345,6 +359,11 @@ public abstract class XMI2TorqueMapper {
 						} else {
 							System.err.println("Error: only 1..* - 1");
 						}
+						
+						foreignKey.setForeignTable(targetName);
+						referenceType.setForeign(targetName);
+						referenceType.setLocal(sourceName);
+						
 						break;
 				}
 				
@@ -359,7 +378,23 @@ public abstract class XMI2TorqueMapper {
 				} else {
 					System.err.println("Error: only * - 1");
 				}
+				
+				foreignKey.setForeignTable(sourceName);
+				referenceType.setForeign(sourceName);
+				referenceType.setLocal(targetName);
+				
 				break;
+		}
+		
+		referenceTypeList.add(referenceType);
+		foreignKey.setReference(referenceTypeList);
+		
+		foreignKeyList.add(foreignKey);
+		
+		for (TableType table : tables) {
+			if (table.getName().equals(referenceType.getLocal())) {
+				table.setForeignKeyOrIndexOrUnique(foreignKeyList);
+			}
 		}
 		
 		LOG.debug(method + "End");
