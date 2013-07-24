@@ -71,7 +71,7 @@ public abstract class XMI2TorqueMapper {
 			}
 		}
 		
-		//neu
+		// Iteration through model for association mapping.
 		for (Package packageObject : modelObject.getNestedPackages()) {
 			database.setName(packageObject.getName());
 
@@ -81,7 +81,6 @@ public abstract class XMI2TorqueMapper {
 				}
 			}
 		}
-		//
 		
 		database.setTable(tableList);
 
@@ -112,7 +111,10 @@ public abstract class XMI2TorqueMapper {
 			if (property.getAssociation() == null) {
 				ColumnType column = mapUmlProperty(property);
 				columnList.add(column);
-			} //else {
+			} 
+			// auskommentiert um neues association mapping zu testen.
+			// kann dann entsprechend gelöscht werden.
+			//else {
 				//ForeignKeyType foreignKey = mapUmlAssociation(property);
 				//foreignKeyList.add(foreignKey);
 			//}
@@ -391,7 +393,7 @@ public abstract class XMI2TorqueMapper {
 		
 		foreignKeyList.add(foreignKey);
 		
-		for (TableType table : tables) {
+		for (TableType table : tableList) {
 			if (table.getName().equals(referenceType.getLocal())) {
 				table.setForeignKeyOrIndexOrUnique(foreignKeyList);
 			}
