@@ -246,48 +246,52 @@ public abstract class XMI2TorqueMapper {
 		
 		Type sourceType = null;
 		Type targetType = null;
+		Property sourceProperty = null;
+		Property targetProperty = null;
 		int sourceLower = 0;
 		int sourceUpper = 0;
 		int targetLower = 0;
 		int targetUpper = 0;
 		String sourceName = null;
 		String targetName = null;
-		String fkTable = null;
+		String fkAssignedTable = null;
 		
 		if (memberEnds.size() > 0 && endTypes.size() > 1) {
 			//get source type and properties
 			sourceType = endTypes.get(0);
-			Property source = memberEnds.get(0);
+			sourceProperty = memberEnds.get(0);
 			sourceName = sourceType.getName();
-			sourceLower = source.getLower();
-			sourceUpper = source.getUpper();
+			sourceLower = sourceProperty.getLower();
+			sourceUpper = sourceProperty.getUpper();
 
 			//get target type and properties
 			targetType = endTypes.get(1);
-			Property targetValues = memberEnds.get(0).getOtherEnd();
+			targetProperty = memberEnds.get(0).getOtherEnd();
 			targetName = targetType.getName();
-			targetLower = targetValues.getLower();
-			targetUpper = targetValues.getUpper();
+			targetLower = targetProperty.getLower();
+			targetUpper = targetProperty.getUpper();
 
 		}
 
 		List<Serializable> foreignKeyList = null;
+		ColumnType newFKColumn = null;
 		
 		switch (sourceLower) {
 			case 0: 
 				
+				foreignKeyList = assignForeignKeyAndReference(sourceType, targetType);
+				newFKColumn = addFKAttribute(targetType, sourceProperty, targetProperty, tableList);
+				fkAssignedTable = sourceName;
+				
 				switch (sourceUpper) {
-					case 0: 
-						// error
-						System.err.println("Error 0..0");
-						break;
-						
+
 					case 1:
 						// source: 0..1
 						// target should only be 1
 						if (targetLower == 1 && targetUpper == 1) {
 							// 0..1 - 1
 							System.err.println("Assoziation: " + sourceName + " 0..1 - 1 " + targetName);
+
 						} else {
 							System.err.println("Error: only 1 - 0..1");
 						}
@@ -303,11 +307,12 @@ public abstract class XMI2TorqueMapper {
 							System.err.println("Error: only 1 - 0..*");
 						}
 						break;
+						
+					default:
+						System.err.println("Error: only 1 - 0..1");
 				}
 				
-				foreignKeyList = assignForeignKeyAndReference(sourceType, targetType);
-				
-				fkTable = sourceName;
+
 				
 				break;
 
@@ -358,8 +363,9 @@ public abstract class XMI2TorqueMapper {
 						}
 						
 						foreignKeyList = assignForeignKeyAndReference(targetType, sourceType);
+						newFKColumn = addFKAttribute(sourceType, targetProperty, sourceProperty, tableList);
 
-						fkTable = targetName;
+						fkAssignedTable = targetName;
 
 						break;
 						
@@ -374,8 +380,9 @@ public abstract class XMI2TorqueMapper {
 						}
 						
 						foreignKeyList = assignForeignKeyAndReference(sourceType, targetType);
+						newFKColumn = addFKAttribute(targetType, sourceProperty, targetProperty, tableList);
 
-						fkTable = sourceName;
+						fkAssignedTable = sourceName;
 						
 						break;
 				}
@@ -393,17 +400,19 @@ public abstract class XMI2TorqueMapper {
 				}
 				
 				foreignKeyList = assignForeignKeyAndReference(sourceType, targetType);
+				newFKColumn = addFKAttribute(targetType, sourceProperty, targetProperty, tableList);
 
-				fkTable = sourceName;
+				fkAssignedTable = sourceName;
 				
 				break;
 		}
 		
 		for (TableType table : tableList) {
 
-			if (table.getName().equals(fkTable)) {
+			if (table.getName().equals(fkAssignedTable)) {
 				for (Serializable fk : foreignKeyList) {
 					table.getForeignKeyOrIndexOrUnique().add(fk);
+					table.getColumn().add(newFKColumn);
 				}
 			}
 		}
@@ -447,5 +456,45 @@ public abstract class XMI2TorqueMapper {
 		foreignKeyList.add(foreignKey);
 
 		return foreignKeyList;
+	}
+	
+	private static ColumnType addFKAttribute(Type target, Property sourceProp, Property targetProp, List<TableType> tableList) {
+		TableType targetTable = null;
+		
+		for (TableType table : tableList) {
+			
+			if (table.getName().equals(target.getName())) {
+				targetTable = table;
+			}
+		}
+		
+		ColumnType fkColumn = new ColumnType();
+
+		List<ColumnType> pkColumn = targetTable.getColumn();
+		ColumnType primaryKey = null;
+				
+		for (ColumnType column : pkColumn) {
+			if (column.isPrimaryKey()) {
+				primaryKey = column;
+			}
+		}
+		
+		if (primaryKey == null) {
+			System.out.println("Entity needs a primary key!");
+		}
+		
+		fkColumn.setPrimaryKey(false);
+		fkColumn.setName(primaryKey.getName());
+		fkColumn.setDescription(primaryKey.getDescription());
+		
+		if (targetProp.getLower() == 1) {
+			fkColumn.setRequired(true);
+		} else {
+			fkColumn.setRequired(false);
+		}
+		
+		fkColumn.setType(primaryKey.getType());
+		
+		return fkColumn;
 	}
 }
