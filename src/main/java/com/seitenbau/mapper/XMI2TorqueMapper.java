@@ -244,34 +244,34 @@ public abstract class XMI2TorqueMapper {
 		EList<Property> memberEnds = associationObject.getMemberEnds();
 		EList<Type> endTypes = associationObject.getEndTypes();
 		
+		Type sourceType = null;
+		Type targetType = null;
 		int sourceLower = 0;
 		int sourceUpper = 0;
 		int targetLower = 0;
 		int targetUpper = 0;
 		String sourceName = null;
 		String targetName = null;
+		String fkTable = null;
 		
-		if (memberEnds.size() > 0) {
+		if (memberEnds.size() > 0 && endTypes.size() > 1) {
 			//get source type and properties
-			Type sourceType = endTypes.get(0);
+			sourceType = endTypes.get(0);
 			Property source = memberEnds.get(0);
 			sourceName = sourceType.getName();
 			sourceLower = source.getLower();
 			sourceUpper = source.getUpper();
 
 			//get target type and properties
-			Type targetType = endTypes.get(1);
+			targetType = endTypes.get(1);
 			Property targetValues = memberEnds.get(0).getOtherEnd();
 			targetName = targetType.getName();
 			targetLower = targetValues.getLower();
 			targetUpper = targetValues.getUpper();
 
 		}
-		
-		ForeignKeyType foreignKey = new ForeignKeyType();
-		ReferenceType referenceType = new ReferenceType();
-		List<Serializable> foreignKeyList = new ArrayList<Serializable>();
-		List<ReferenceType> referenceTypeList = new ArrayList<ReferenceType>();
+
+		List<Serializable> foreignKeyList = null;
 		
 		switch (sourceLower) {
 			case 0: 
@@ -294,7 +294,7 @@ public abstract class XMI2TorqueMapper {
 						break;
 						
 					case -1: 
-						// source: 0..n
+						// source: 0..*
 						// target should only be 1
 						if (targetLower == 1 && targetUpper == 1) {
 							//0..* - 1
@@ -305,9 +305,9 @@ public abstract class XMI2TorqueMapper {
 						break;
 				}
 				
-				foreignKey.setForeignTable(targetName);
-				referenceType.setForeign(targetName);
-				referenceType.setLocal(sourceName);
+				foreignKeyList = assignForeignKeyAndReference(sourceType, targetType);
+				
+				fkTable = sourceName;
 				
 				break;
 
@@ -342,13 +342,24 @@ public abstract class XMI2TorqueMapper {
 								}
 								
 								break;
+								
+							case -1:
+								if (targetUpper == -1) {
+									// 1 - *
+									System.err.println("Assoziation: " + sourceName	+ " 1 - * " + targetName);
+								} else {
+									System.err.println("Error: only 1 - 0..1 or 1 - 0..* or 1 - 1 or 1 - 1..*");
+								}
+								
+								break;
+								
 							default:
 								System.err.println("Error: only 1 - 0..1 or 1 - 0..* or 1 - 1 or 1 - 1..*");
 						}
 						
-						foreignKey.setForeignTable(sourceName);
-						referenceType.setForeign(sourceName);
-						referenceType.setLocal(targetName);
+						foreignKeyList = assignForeignKeyAndReference(targetType, sourceType);
+
+						fkTable = targetName;
 
 						break;
 						
@@ -362,9 +373,9 @@ public abstract class XMI2TorqueMapper {
 							System.err.println("Error: only 1..* - 1");
 						}
 						
-						foreignKey.setForeignTable(targetName);
-						referenceType.setForeign(targetName);
-						referenceType.setLocal(sourceName);
+						foreignKeyList = assignForeignKeyAndReference(sourceType, targetType);
+
+						fkTable = sourceName;
 						
 						break;
 				}
@@ -381,24 +392,60 @@ public abstract class XMI2TorqueMapper {
 					System.err.println("Error: only * - 1");
 				}
 				
-				foreignKey.setForeignTable(sourceName);
-				referenceType.setForeign(sourceName);
-				referenceType.setLocal(targetName);
+				foreignKeyList = assignForeignKeyAndReference(sourceType, targetType);
+
+				fkTable = sourceName;
 				
 				break;
 		}
 		
-		referenceTypeList.add(referenceType);
-		foreignKey.setReference(referenceTypeList);
-		
-		foreignKeyList.add(foreignKey);
-		
 		for (TableType table : tableList) {
-			if (table.getName().equals(referenceType.getLocal())) {
-				table.setForeignKeyOrIndexOrUnique(foreignKeyList);
+
+			if (table.getName().equals(fkTable)) {
+				for (Serializable fk : foreignKeyList) {
+					table.getForeignKeyOrIndexOrUnique().add(fk);
+				}
 			}
 		}
-		
+			
 		LOG.debug(method + "End");
+	}
+	
+	private static List<Serializable> assignForeignKeyAndReference(Type source, Type target) {
+
+		List<Element> list = target.getOwnedElements();
+		String primaryKeyName = null;
+		
+		for (Element elem : list) {
+			
+			Property prop = null;
+			
+			if (elem instanceof Property) {
+				prop = (Property) elem;
+			}
+			
+			if (prop.isID()) {
+				primaryKeyName = prop.getName();
+				System.err.println(prop.getName());
+			}
+			
+		}
+		
+		ForeignKeyType foreignKey = new ForeignKeyType();
+		foreignKey.setForeignTable(target.getName());
+		
+		ReferenceType referenceType = new ReferenceType();
+		referenceType.setLocal(primaryKeyName);
+		referenceType.setForeign(primaryKeyName);
+		
+		List<ReferenceType> referenceTypeList = new ArrayList<ReferenceType>();
+		referenceTypeList.add(referenceType);
+		
+		foreignKey.setReference(referenceTypeList);
+		
+		List<Serializable> foreignKeyList = new ArrayList<Serializable>();
+		foreignKeyList.add(foreignKey);
+
+		return foreignKeyList;
 	}
 }
