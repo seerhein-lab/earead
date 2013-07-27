@@ -9,6 +9,7 @@ import org.apache.torque.ColumnType;
 import org.apache.torque.DatabaseType;
 import org.apache.torque.ForeignKeyType;
 import org.apache.torque.IdMethodType;
+import org.apache.torque.InheritanceType;
 import org.apache.torque.ReferenceType;
 import org.apache.torque.SqlDataType;
 import org.apache.torque.TableType;
@@ -16,6 +17,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.uml2.uml.Association;
 import org.eclipse.uml2.uml.Class;
 import org.eclipse.uml2.uml.Element;
+import org.eclipse.uml2.uml.Generalization;
 import org.eclipse.uml2.uml.Model;
 import org.eclipse.uml2.uml.Package;
 import org.eclipse.uml2.uml.Property;
@@ -81,7 +83,7 @@ public abstract class XMI2TorqueMapper {
 				}
 			}
 		}
-		
+
 		database.setTable(tableList);
 
 		LOG.debug(method + "End");
@@ -119,7 +121,27 @@ public abstract class XMI2TorqueMapper {
 				//foreignKeyList.add(foreignKey);
 			//}
 		}
-
+		
+		//Generalizations
+		InheritanceType inheritanceType = null;
+		for (Generalization gen : classObject.getGeneralizations()) {
+			inheritanceType = new InheritanceType();
+			inheritanceType.setKey(gen.getSpecific().getName());
+			inheritanceType.setClazz(gen.getSpecific().getName());
+			inheritanceType.setExtends(gen.getGeneral().getName());
+			System.err.println(inheritanceType);
+		}
+		
+		if (inheritanceType != null) {
+			ColumnType inheritanceColumn = new ColumnType();
+			List<InheritanceType> inheritanceList = new ArrayList<InheritanceType>();
+			
+			inheritanceList.add(inheritanceType);
+			inheritanceColumn.setInheritance(inheritanceList);
+			
+			columnList.add(inheritanceColumn);
+		}
+		
 		table.setColumn(columnList);
 		table.setForeignKeyOrIndexOrUnique(foreignKeyList);
 
