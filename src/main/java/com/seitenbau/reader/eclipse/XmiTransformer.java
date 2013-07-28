@@ -157,7 +157,7 @@ public abstract class XmiTransformer {
 	}
 	
 	/**
-	 * Add the ?? attribute to the owned attributes elements for the given
+	 * Add the max length attribute to the owned attributes elements for the given
 	 * document.
 	 * 
 	 * @param doc
@@ -178,8 +178,9 @@ public abstract class XmiTransformer {
 			}
 
 			Element lengthElement = getClassAttributeByXmiId(doc, xmiId);
-			//System.err.println(lengthElement.getUserData(key));
-			lengthElement.setAttribute("length", "100");
+			//liefert aktuell nur das Element, welches der xmi id entspricht.
+			//Auslesen des max Wertes funktioniert noch nicht.
+			//lengthElement.setAttribute("max", "100");
 		}
 
 		LOG.debug(method + "End");

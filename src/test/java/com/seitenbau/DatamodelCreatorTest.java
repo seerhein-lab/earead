@@ -17,7 +17,7 @@ public class DatamodelCreatorTest {
 
 		// transform Enterprise Architecture file
 		File xmiFile = FileHelper
-				.getXmiFile("src/test/resources/import/export.xmi");
+				.getXmiFile("src/test/resources/import/complex.xmi");
 		File typesFile = FileHelper
 				.getXmiFile("src/main/resources/import/ea_extension_primitivetypes.xmi");
 		File transformedFile = XmiTransformer.transform(xmiFile, typesFile);

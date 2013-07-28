@@ -1,7 +1,6 @@
 package com.seitenbau.mapper;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -124,7 +123,6 @@ public abstract class XMI2TorqueMapper {
 			inheritanceType.setKey(gen.getSpecific().getName());
 			inheritanceType.setClazz(gen.getSpecific().getName());
 			inheritanceType.setExtends(gen.getGeneral().getName());
-			System.err.println(inheritanceType);
 		}
 		
 		if (inheritanceType != null) {
@@ -160,7 +158,9 @@ public abstract class XMI2TorqueMapper {
 		column.setPrimaryKey(propertyObject.isID());
 		column.setName(propertyObject.getName());
 		column.setDescription("Description:" + propertyObject.getName());
-		column.setSize(new BigDecimal(1));
+		//Auslesen aus Element funktioniert noch nicht. In welches Feld soll
+		//Wert geschrieben werden?
+		//column.setSize(new BigDecimal(1));
 
 		if (propertyObject.getLower() == 1) {
 			column.setRequired(Boolean.TRUE);
@@ -261,7 +261,7 @@ public abstract class XMI2TorqueMapper {
 						// target should only be 1
 						if (targetLower == 1 && targetUpper == 1) {
 							// 0..1 - 1
-							System.err.println("Assoziation: " + sourceName + " 0..1 - 1 " + targetName);
+							System.out.println("Assoziation: " + sourceName + " 0..1 - 1 " + targetName);
 
 						} else {
 							System.err.println("Error: only 1 - 0..1");
@@ -273,7 +273,7 @@ public abstract class XMI2TorqueMapper {
 						// target should only be 1
 						if (targetLower == 1 && targetUpper == 1) {
 							//0..* - 1
-							System.err.println("Assoziation: " + sourceName	+ " 0..* - 1 " + targetName);
+							System.out.println("Assoziation: " + sourceName	+ " 0..* - 1 " + targetName);
 						} else {
 							System.err.println("Error: only 1 - 0..*");
 						}
@@ -299,10 +299,10 @@ public abstract class XMI2TorqueMapper {
 							case 0:
 								if (targetUpper == 1) {
 									// 1 - 0..1
-									System.err.println("Assoziation: " + sourceName	+ " 1 - 0..1 " + targetName);
+									System.out.println("Assoziation: " + sourceName	+ " 1 - 0..1 " + targetName);
 								} else if (targetUpper == -1) {
 									// 1 - 0..*
-									System.err.println("Assoziation: " + sourceName	+ " 1 - 0..* " + targetName);
+									System.out.println("Assoziation: " + sourceName	+ " 1 - 0..* " + targetName);
 								} else {
 									System.err.println("Error: only 1 - 0..1 or 1 - 0..* or 1 - 1 or 1 - 1..*");
 								}
@@ -312,10 +312,10 @@ public abstract class XMI2TorqueMapper {
 							case 1:
 								if (targetUpper == 1) {
 									// 1 - 1
-									System.err.println("Assoziation: " + sourceName	+ " 1 - 1 " + targetName);
+									System.out.println("Assoziation: " + sourceName	+ " 1 - 1 " + targetName);
 								} else if (targetUpper == -1) {
 									// 1 - 1..*
-									System.err.println("Assoziation: " + sourceName	+ " 1 - 1..* " + targetName);
+									System.out.println("Assoziation: " + sourceName	+ " 1 - 1..* " + targetName);
 								} else {
 									System.err.println("Error: only 1 - 0..1 or 1 - 0..* or 1 - 1 or 1 - 1..*");
 								}
@@ -325,7 +325,7 @@ public abstract class XMI2TorqueMapper {
 							case -1:
 								if (targetUpper == -1) {
 									// 1 - *
-									System.err.println("Assoziation: " + sourceName	+ " 1 - * " + targetName);
+									System.out.println("Assoziation: " + sourceName	+ " 1 - * " + targetName);
 								} else {
 									System.err.println("Error: only 1 - 0..1 or 1 - 0..* or 1 - 1 or 1 - 1..*");
 								}
@@ -348,7 +348,7 @@ public abstract class XMI2TorqueMapper {
 						// target should only be 1
 						if (targetLower == 1 && targetUpper == 1) {
 							// 1..* - 1
-							System.err.println("Assoziation: " + sourceName + " 1..* - 1 " + targetName);
+							System.out.println("Assoziation: " + sourceName + " 1..* - 1 " + targetName);
 						} else {
 							System.err.println("Error: only 1..* - 1");
 						}
@@ -368,7 +368,7 @@ public abstract class XMI2TorqueMapper {
 				// target should only be 1
 				if (targetLower == 1 && targetUpper == 1) {
 					// * - 1
-					System.err.println("Assoziation: " + sourceName + " * - 1 " + targetName);
+					System.out.println("Assoziation: " + sourceName + " * - 1 " + targetName);
 				} else {
 					System.err.println("Error: only * - 1");
 				}
@@ -389,6 +389,12 @@ public abstract class XMI2TorqueMapper {
 		LOG.debug(method + "End");
 	}
 	
+	/**
+	 * Creates a foreign key and a reference object for the specific association.
+	 * 
+	 * @param singleEntity Entity on the 1 side: something - 1 <- this Entity :-)
+	 * @return foreignKey object
+	 */
 	private static List<Serializable> createForeignKeyAndReference(Type singleEntity) {
 		String method = "assignForeignKeyAndReference(): ";
 		LOG.debug(method + "Start");
@@ -406,7 +412,6 @@ public abstract class XMI2TorqueMapper {
 			
 			if (prop.isID()) {
 				primaryKeyName = prop.getName();
-				System.err.println(prop.getName());
 			}
 			
 		}
@@ -431,6 +436,15 @@ public abstract class XMI2TorqueMapper {
 		return foreignKeyList;
 	}
 	
+	/**
+	 * Creates a column object for the foreign key. Copies all the values
+	 * from the primary key column object.
+	 * 
+	 * @param singleEntity Entity on the 1 side: something - 1 <- this Entity :-)
+	 * @param singleEntityProp Properties of the single side Entity
+	 * @param tableList List of existing database tables
+	 * @return Column object for foreign key with values from primary key
+	 */
 	private static ColumnType createFKAttribute(Type singleEntity, Property singleEntityProp, List<TableType> tableList) {
 		String method = "addFKAttribute(): ";
 		LOG.debug(method + "Start");
@@ -446,10 +460,10 @@ public abstract class XMI2TorqueMapper {
 		
 		ColumnType fkColumn = new ColumnType();
 
-		List<ColumnType> pkColumn = singleEntityTable.getColumn();
+		List<ColumnType> columns = singleEntityTable.getColumn();
 		ColumnType primaryKey = null;
 				
-		for (ColumnType column : pkColumn) {
+		for (ColumnType column : columns) {
 			if (column.isPrimaryKey()) {
 				primaryKey = column;
 			}
