@@ -157,7 +157,7 @@ public abstract class XmiTransformer {
 	}
 	
 	/**
-	 * Add the isID attribute to the owned attributes elements for the given
+	 * Add the ?? attribute to the owned attributes elements for the given
 	 * document.
 	 * 
 	 * @param doc

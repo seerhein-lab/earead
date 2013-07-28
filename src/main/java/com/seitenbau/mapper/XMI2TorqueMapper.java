@@ -114,13 +114,7 @@ public abstract class XMI2TorqueMapper {
 			if (property.getAssociation() == null) {
 				ColumnType column = mapUmlProperty(property);
 				columnList.add(column);
-			} 
-			// auskommentiert um neues association mapping zu testen.
-			// kann dann entsprechend gelöscht werden.
-			//else {
-				//ForeignKeyType foreignKey = mapUmlAssociation(property);
-				//foreignKeyList.add(foreignKey);
-			//}
+			}
 		}
 		
 		//Generalizations
@@ -148,53 +142,6 @@ public abstract class XMI2TorqueMapper {
 
 		LOG.debug(method + "End");
 		return table;
-	}
-
-	/**
-	 * Maps the UML property which contains the association object (using the
-	 * eclipse libraries ecore und uml from EMF project) to a Apache Torque
-	 * ForeignKeyType object.
-	 * 
-	 * @param propertyObject
-	 *            the property which contains the association to map.
-	 * @return the Apache Torque ForeignKeyType object.
-	 */
-	private static ForeignKeyType mapUmlAssociation(Property propertyObject) {
-		String method = "mapUmlAssociation(): ";
-		LOG.debug(method + "Start");
-
-		Association associationObject = propertyObject.getAssociation();
-		if (associationObject == null) {
-			String msg = "Property is no association: " + propertyObject;
-			throw new IllegalArgumentException(msg);
-		}
-
-		ForeignKeyType foreignKey = new ForeignKeyType();
-		foreignKey.setForeignTable(propertyObject.getType().getName());
-
-		List<ReferenceType> referenceTypeList = new ArrayList<ReferenceType>();
-		for (Property associationProperty : associationObject.getOwnedEnds()) {
-
-			// TODO Unterschiedliche Assoziation-Typen implementieren
-			// System.out.println("\t\t\tLower: "
-			// + associationProperty.getLower());
-			// System.out.println("\t\t\tUpper: "
-			// + associationProperty.getUpper());
-
-			ReferenceType referenceType = new ReferenceType();
-			// TODO Fremdschlüssel verwenden und nicht das Objekt
-			referenceType.setForeign(propertyObject.getType().getName());
-			// TODO Fremdschlüssel verwenden und nicht das Objekt
-			referenceType.setLocal(associationProperty.getType().getName());
-			referenceTypeList.add(referenceType);
-
-			// only one reference, leave loop
-			break;
-		}
-		foreignKey.setReference(referenceTypeList);
-
-		LOG.debug(method + "End");
-		return foreignKey;
 	}
 
 	/**
@@ -303,8 +250,8 @@ public abstract class XMI2TorqueMapper {
 		switch (sourceLower) {
 			case 0: 
 				
-				foreignKeyList = assignForeignKeyAndReference(sourceType, targetType);
-				newFKColumn = addFKAttribute(targetType, sourceProperty, targetProperty, tableList);
+				foreignKeyList = createForeignKeyAndReference(targetType);
+				newFKColumn = createFKAttribute(targetType, targetProperty, tableList);
 				fkAssignedTable = sourceName;
 				
 				switch (sourceUpper) {
@@ -336,11 +283,14 @@ public abstract class XMI2TorqueMapper {
 						System.err.println("Error: only 1 - 0..1");
 				}
 				
-
-				
 				break;
 
 			case 1: 
+				
+				foreignKeyList = createForeignKeyAndReference(sourceType);
+				newFKColumn = createFKAttribute(sourceType, sourceProperty, tableList);
+				fkAssignedTable = targetName;
+				
 				switch (sourceUpper) {
 					case 1:
 						// source 1
@@ -385,15 +335,15 @@ public abstract class XMI2TorqueMapper {
 							default:
 								System.err.println("Error: only 1 - 0..1 or 1 - 0..* or 1 - 1 or 1 - 1..*");
 						}
-						
-						foreignKeyList = assignForeignKeyAndReference(targetType, sourceType);
-						newFKColumn = addFKAttribute(sourceType, targetProperty, sourceProperty, tableList);
-
-						fkAssignedTable = targetName;
 
 						break;
 						
-					case -1: 
+					case -1:
+						
+						foreignKeyList = createForeignKeyAndReference(targetType);
+						newFKColumn = createFKAttribute(targetType, targetProperty, tableList);
+						fkAssignedTable = sourceName;
+						
 						// source 1..n
 						// target should only be 1
 						if (targetLower == 1 && targetUpper == 1) {
@@ -403,17 +353,17 @@ public abstract class XMI2TorqueMapper {
 							System.err.println("Error: only 1..* - 1");
 						}
 						
-						foreignKeyList = assignForeignKeyAndReference(sourceType, targetType);
-						newFKColumn = addFKAttribute(targetType, sourceProperty, targetProperty, tableList);
-
-						fkAssignedTable = sourceName;
-						
 						break;
 				}
 				
 				break;
 				
-			case -1: 
+			case -1:
+				
+				foreignKeyList = createForeignKeyAndReference(targetType);
+				newFKColumn = createFKAttribute(targetType, targetProperty, tableList);
+				fkAssignedTable = sourceName;
+				
 				// source n
 				// target should only be 1
 				if (targetLower == 1 && targetUpper == 1) {
@@ -422,11 +372,6 @@ public abstract class XMI2TorqueMapper {
 				} else {
 					System.err.println("Error: only * - 1");
 				}
-				
-				foreignKeyList = assignForeignKeyAndReference(sourceType, targetType);
-				newFKColumn = addFKAttribute(targetType, sourceProperty, targetProperty, tableList);
-
-				fkAssignedTable = sourceName;
 				
 				break;
 		}
@@ -444,11 +389,11 @@ public abstract class XMI2TorqueMapper {
 		LOG.debug(method + "End");
 	}
 	
-	private static List<Serializable> assignForeignKeyAndReference(Type source, Type target) {
+	private static List<Serializable> createForeignKeyAndReference(Type singleEntity) {
 		String method = "assignForeignKeyAndReference(): ";
 		LOG.debug(method + "Start");
 
-		List<Element> list = target.getOwnedElements();
+		List<Element> list = singleEntity.getOwnedElements();
 		String primaryKeyName = null;
 		
 		for (Element elem : list) {
@@ -467,7 +412,7 @@ public abstract class XMI2TorqueMapper {
 		}
 		
 		ForeignKeyType foreignKey = new ForeignKeyType();
-		foreignKey.setForeignTable(target.getName());
+		foreignKey.setForeignTable(singleEntity.getName());
 		
 		ReferenceType referenceType = new ReferenceType();
 		referenceType.setLocal(primaryKeyName);
@@ -486,22 +431,22 @@ public abstract class XMI2TorqueMapper {
 		return foreignKeyList;
 	}
 	
-	private static ColumnType addFKAttribute(Type target, Property sourceProp, Property targetProp, List<TableType> tableList) {
+	private static ColumnType createFKAttribute(Type singleEntity, Property singleEntityProp, List<TableType> tableList) {
 		String method = "addFKAttribute(): ";
 		LOG.debug(method + "Start");
 		
-		TableType targetTable = null;
+		TableType singleEntityTable = null;
 		
 		for (TableType table : tableList) {
 			
-			if (table.getName().equals(target.getName())) {
-				targetTable = table;
+			if (table.getName().equals(singleEntity.getName())) {
+				singleEntityTable = table;
 			}
 		}
 		
 		ColumnType fkColumn = new ColumnType();
 
-		List<ColumnType> pkColumn = targetTable.getColumn();
+		List<ColumnType> pkColumn = singleEntityTable.getColumn();
 		ColumnType primaryKey = null;
 				
 		for (ColumnType column : pkColumn) {
@@ -518,7 +463,7 @@ public abstract class XMI2TorqueMapper {
 		fkColumn.setName(primaryKey.getName());
 		fkColumn.setDescription(primaryKey.getDescription());
 		
-		if (targetProp.getLower() == 1) {
+		if (singleEntityProp.getLower() == 1) {
 			fkColumn.setRequired(true);
 		} else {
 			fkColumn.setRequired(false);
