@@ -33,7 +33,8 @@ public abstract class XmiTransformer {
 
 	private static final String TARGET_FILE_PATH = "target/transformed.xmi";
 
-	private final static String EA_ELEMENT_PRIMARY_KEY = "thecustomprofile:SchlÃ¼sselattribut";
+	private final static String EA_ELEMENT_PRIMARY_KEY = "thecustomprofile:Schlüsselattribut";
+	private final static String EA_ELEMENT_MAX = "thecustomprofile:max";
 	private final static String EA_ATTRIBUT_BASE = "base_Attribute";
 	private final static String EA_PROPERTY_BASE = "base_Property";
 
@@ -61,6 +62,7 @@ public abstract class XmiTransformer {
 
 			appendPrimitiveTypes(doc, primitivetypesDoc);
 			transformPrimaryKeys(doc);
+			transformLengths(doc);
 
 			File transformedFile = new File(TARGET_FILE_PATH);
 			writeTransformedFile(doc, transformedFile);
@@ -149,6 +151,35 @@ public abstract class XmiTransformer {
 			Element primaryKeyElement = getClassAttributeByXmiId(doc, xmiId);
 			primaryKeyElement.setAttribute(XMI_ATTR_IS_ID,
 					Boolean.TRUE.toString());
+		}
+
+		LOG.debug(method + "End");
+	}
+	
+	/**
+	 * Add the isID attribute to the owned attributes elements for the given
+	 * document.
+	 * 
+	 * @param doc
+	 *            the document to transform.
+	 */
+	private static void transformLengths(Document doc) {
+		String method = "transformLengths(): ";
+		LOG.debug(method + "Start");
+
+		NodeList lengthsEA = doc
+				.getElementsByTagName(EA_ELEMENT_MAX);
+		for (int i = 0; i < lengthsEA.getLength(); i++) {
+			Element length = (Element) lengthsEA.item(i);
+
+			String xmiId = length.getAttribute(EA_ATTRIBUT_BASE);
+			if (xmiId.equals("")) {
+				xmiId = length.getAttribute(EA_PROPERTY_BASE);
+			}
+
+			Element lengthElement = getClassAttributeByXmiId(doc, xmiId);
+			//System.err.println(lengthElement.getUserData(key));
+			lengthElement.setAttribute("length", "100");
 		}
 
 		LOG.debug(method + "End");

@@ -1,6 +1,7 @@
 package com.seitenbau.mapper;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -212,6 +213,7 @@ public abstract class XMI2TorqueMapper {
 		column.setPrimaryKey(propertyObject.isID());
 		column.setName(propertyObject.getName());
 		column.setDescription("Description:" + propertyObject.getName());
+		column.setSize(new BigDecimal(1));
 
 		if (propertyObject.getLower() == 1) {
 			column.setRequired(Boolean.TRUE);
@@ -443,6 +445,8 @@ public abstract class XMI2TorqueMapper {
 	}
 	
 	private static List<Serializable> assignForeignKeyAndReference(Type source, Type target) {
+		String method = "assignForeignKeyAndReference(): ";
+		LOG.debug(method + "Start");
 
 		List<Element> list = target.getOwnedElements();
 		String primaryKeyName = null;
@@ -477,10 +481,15 @@ public abstract class XMI2TorqueMapper {
 		List<Serializable> foreignKeyList = new ArrayList<Serializable>();
 		foreignKeyList.add(foreignKey);
 
+		LOG.debug(method + "End");
+
 		return foreignKeyList;
 	}
 	
 	private static ColumnType addFKAttribute(Type target, Property sourceProp, Property targetProp, List<TableType> tableList) {
+		String method = "addFKAttribute(): ";
+		LOG.debug(method + "Start");
+		
 		TableType targetTable = null;
 		
 		for (TableType table : tableList) {
@@ -516,6 +525,8 @@ public abstract class XMI2TorqueMapper {
 		}
 		
 		fkColumn.setType(primaryKey.getType());
+		
+		LOG.debug(method + "End");
 		
 		return fkColumn;
 	}
