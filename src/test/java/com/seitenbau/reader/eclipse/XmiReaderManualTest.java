@@ -15,7 +15,7 @@ import org.eclipse.uml2.uml.Type;
 import com.seitenbau.common.FileHelper;
 
 
-public class XmiReaderTest {
+public class XmiReaderManualTest {
 
 	public static void main(String[] args) throws ClassNotFoundException,
 			IOException {

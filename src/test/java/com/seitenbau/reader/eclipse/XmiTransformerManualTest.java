@@ -12,7 +12,7 @@ import com.seitenbau.reader.eclipse.XmiTransformer;
  * 
  * @author nkunstek
  */
-public abstract class XmiTransformerTest {
+public abstract class XmiTransformerManualTest {
 	
 	public static void main(String args[]) throws FileNotFoundException {
 		
