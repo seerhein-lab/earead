@@ -23,7 +23,7 @@ public class FileHelperTest {
 	private static File testFile;
 	
 	@BeforeClass
-	public static void setup() {
+	public static void setUpBeforeClass() {
 		filePath = "src/test/resources/import/export.xmi";
 		failurePath = "testFailure";
 		failureDirectory = "src/test/resources/import";
@@ -92,7 +92,7 @@ public class FileHelperTest {
 	}
 	
 	@AfterClass
-	public static void tearDown() {
+	public static void tearDownAfterClass() {
 		testFile.delete();
 	}
 

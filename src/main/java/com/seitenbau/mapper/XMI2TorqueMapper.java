@@ -98,7 +98,7 @@ public abstract class XMI2TorqueMapper {
 	 *            the class to map.
 	 * @return the Apache Torque table object.
 	 */
-	private static TableType mapUmlClass(Class classObject) {
+	static TableType mapUmlClass(Class classObject) {
 		String method = "mapUmlClass(): ";
 		LOG.debug(method + "Start");
 
@@ -150,7 +150,7 @@ public abstract class XMI2TorqueMapper {
 	 *            the property to map.
 	 * @return the Apache Torque column object.
 	 */
-	private static ColumnType mapUmlProperty(Property propertyObject) {
+	static ColumnType mapUmlProperty(Property propertyObject) {
 		String method = "mapUmlProperty(): ";
 		LOG.debug(method + "Start");
 
@@ -189,7 +189,7 @@ public abstract class XMI2TorqueMapper {
 	 *            the property type object to map.
 	 * @return the Apache Torque SqlDataType.
 	 */
-	private static SqlDataType mapUmlType(Type typeObject) {
+	static SqlDataType mapUmlType(Type typeObject) {
 		// TODO: andere Typen (am Besten durch eine konfigurierbare Map)
 		if (typeObject.getName().equals("int")) {
 			return SqlDataType.INTEGER;
@@ -205,7 +205,7 @@ public abstract class XMI2TorqueMapper {
 	 * @param element the UML association element.
 	 * @param tables List of existing tables to map specific foreign keys.
 	 */
-	private static void mapAssociation(Element element, List<TableType> tables) {
+	static void mapAssociation(Element element, List<TableType> tables) {
 		String method = "mapAssociation(): ";
 		LOG.debug(method + "Start");
 		
@@ -395,7 +395,7 @@ public abstract class XMI2TorqueMapper {
 	 * @param singleEntity Entity on the 1 side: something - 1 <- this Entity :-)
 	 * @return foreignKey object
 	 */
-	private static List<Serializable> createForeignKeyAndReference(Type singleEntity) {
+	static List<Serializable> createForeignKeyAndReference(Type singleEntity) {
 		String method = "assignForeignKeyAndReference(): ";
 		LOG.debug(method + "Start");
 
@@ -408,10 +408,10 @@ public abstract class XMI2TorqueMapper {
 			
 			if (elem instanceof Property) {
 				prop = (Property) elem;
-			}
-			
-			if (prop.isID()) {
-				primaryKeyName = prop.getName();
+				
+				if (prop.isID()) {
+					primaryKeyName = prop.getName();
+				}
 			}
 			
 		}
@@ -445,7 +445,7 @@ public abstract class XMI2TorqueMapper {
 	 * @param tableList List of existing database tables
 	 * @return Column object for foreign key with values from primary key
 	 */
-	private static ColumnType createFKAttribute(Type singleEntity, Property singleEntityProp, List<TableType> tableList) {
+	static ColumnType createFKAttribute(Type singleEntity, Property singleEntityProp, List<TableType> tableList) {
 		String method = "addFKAttribute(): ";
 		LOG.debug(method + "Start");
 		
@@ -456,6 +456,11 @@ public abstract class XMI2TorqueMapper {
 			if (table.getName().equals(singleEntity.getName())) {
 				singleEntityTable = table;
 			}
+		}
+		
+		if (singleEntityTable == null) {
+			String msg = "No table found!";
+			throw new IllegalArgumentException(msg);
 		}
 		
 		ColumnType fkColumn = new ColumnType();
@@ -470,7 +475,8 @@ public abstract class XMI2TorqueMapper {
 		}
 		
 		if (primaryKey == null) {
-			System.out.println("Entity needs a primary key!");
+			String msg = "Entity needs a primary key!";
+			throw new IllegalArgumentException(msg);
 		}
 		
 		fkColumn.setPrimaryKey(false);
