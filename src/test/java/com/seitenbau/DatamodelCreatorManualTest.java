@@ -11,7 +11,7 @@ import com.seitenbau.reader.eclipse.XmiReader;
 import com.seitenbau.reader.eclipse.XmiTransformer;
 import com.seitenbau.writer.torque.DatamodelWriter;
 
-public class DatamodelCreatorTest {
+public class DatamodelCreatorManualTest {
 
 	public static void main(String[] args) throws Exception {
 
