@@ -45,9 +45,9 @@ public class DatamodelWriterTest {
 		// map Enterprise Architecture file to Torque file
 		DatabaseType database = XMI2TorqueMapper.mapUmlModel(model);
 		
-		DatamodelWriter.writeDatamodel(database, transformedFile);
+		DatamodelWriter.writeDatamodel(database, file);
 		
-		assertNotNull(database);
+		assertTrue(file.length() > 0);
 	}
 	
 	@AfterClass

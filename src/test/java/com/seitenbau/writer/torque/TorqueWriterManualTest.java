@@ -15,7 +15,7 @@ import org.apache.torque.TableType;
 
 import com.seitenbau.common.FileHelper;
 
-public class TorqueWriterTest {
+public class TorqueWriterManualTest {
 
 	public static void main(String[] argv) throws JAXBException, IOException {
 
