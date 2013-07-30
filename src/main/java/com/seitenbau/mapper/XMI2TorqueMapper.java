@@ -280,7 +280,7 @@ public abstract class XMI2TorqueMapper {
 						break;
 						
 					default:
-						System.err.println("Error: only 1 - 0..1");
+						System.err.println("Error: only 1 - 0..1 or 1 - 0..*");
 				}
 				
 				break;

@@ -195,8 +195,22 @@ public class XMI2TorqueMapperTest {
 	}
 
 	@Test
-	public void testMapAssociation() {
-		//TODO: eventuell mit komplettem Modell, das entsprechend angepasst ist.
+	public void testMapAssociation() throws FileNotFoundException {
+
+		File xmiFile = FileHelper
+				.getXmiFile("src/test/resources/import/complex.xmi");
+		File typesFile = FileHelper
+				.getXmiFile("src/main/resources/import/ea_extension_primitivetypes.xmi");
+		File transformedFile = XmiTransformer.transform(xmiFile, typesFile);
+		System.out.println("\n" + FileHelper.getContents(transformedFile));
+
+		// read Enterprise Architecture file
+		Model model = XmiReader.readUmlModel(transformedFile);
+
+		// map Enterprise Architecture file to Torque file
+		DatabaseType database = XMI2TorqueMapper.mapUmlModel(model);
+		
+		assertNotNull(database);
 	}
 
 	@Test
