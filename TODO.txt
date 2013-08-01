@@ -1,0 +1,16 @@
+Mapping:
+- Kontrollieren ob das Mapping der vorhandenen Möglichkeiten richtig ist
+- Unit Tests, besonders XMI2TorqueMapperTest, erweitern und
+  Torque Schema Ausgaben überprüfen
+- eventuell große Mapping Methode optimieren, falls es gar nicht nötig ist
+  alle Fälle einzeln zu unterscheiden
+- überprüfen wie * Multiplizität von Enterprise Architect exportiert wird.
+  Eventuell Zusammenfassung mit anderer Multiplizität
+
+Maximale Länge
+- Auslesen des max Wertes aus Export XMI
+- Eintragen des max Wertes ins richtige Attribut
+- Max Wert mappen
+
+Vererbung
+- neu machen und richtig implementieren :-)

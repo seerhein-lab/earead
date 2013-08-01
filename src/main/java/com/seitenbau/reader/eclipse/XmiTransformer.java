@@ -180,7 +180,6 @@ public abstract class XmiTransformer {
 			Element lengthElement = getClassAttributeByXmiId(doc, xmiId);
 			//liefert aktuell nur das Element, welches der xmi id entspricht.
 			//Auslesen des max Wertes funktioniert noch nicht.
-			//lengthElement.setAttribute("max", "100");
 		}
 
 		LOG.debug(method + "End");

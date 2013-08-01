@@ -116,7 +116,7 @@ public abstract class XMI2TorqueMapper {
 			}
 		}
 		
-		//Generalizations
+		// Iteration through generalizations
 		InheritanceType inheritanceType = null;
 		for (Generalization gen : classObject.getGeneralizations()) {
 			inheritanceType = new InheritanceType();
@@ -160,7 +160,7 @@ public abstract class XMI2TorqueMapper {
 		column.setDescription("Description:" + propertyObject.getName());
 		//Auslesen aus Element funktioniert noch nicht. In welches Feld soll
 		//Wert geschrieben werden?
-		//column.setSize(new BigDecimal(1));
+		//column.setSize();
 
 		if (propertyObject.getLower() == 1) {
 			column.setRequired(Boolean.TRUE);
@@ -408,7 +408,7 @@ public abstract class XMI2TorqueMapper {
 			
 			if (elem instanceof Property) {
 				prop = (Property) elem;
-				
+				//looking for primary key of single entity table
 				if (prop.isID()) {
 					primaryKeyName = prop.getName();
 				}
@@ -416,6 +416,7 @@ public abstract class XMI2TorqueMapper {
 			
 		}
 		
+		//creating new foreign key and reference
 		ForeignKeyType foreignKey = new ForeignKeyType();
 		foreignKey.setForeignTable(singleEntity.getName());
 		
@@ -433,6 +434,7 @@ public abstract class XMI2TorqueMapper {
 
 		LOG.debug(method + "End");
 
+		//includes the foreign key
 		return foreignKeyList;
 	}
 	
@@ -451,6 +453,7 @@ public abstract class XMI2TorqueMapper {
 		
 		TableType singleEntityTable = null;
 		
+		//looking for the table the fk referes to
 		for (TableType table : tableList) {
 			
 			if (table.getName().equals(singleEntity.getName())) {
@@ -463,6 +466,7 @@ public abstract class XMI2TorqueMapper {
 			throw new IllegalArgumentException(msg);
 		}
 		
+		//creating new column for the fk with the same attributes as the pk
 		ColumnType fkColumn = new ColumnType();
 
 		List<ColumnType> columns = singleEntityTable.getColumn();
