@@ -167,29 +167,29 @@ kommen kann.
 
 Schritte zum Export des UML Klassendiagramms aus dem Enterprise Architect:
 
-1. Rechtsklick auf Domain Model -> Import/Export
+1.) Rechtsklick auf Domain Model -> Import/Export
 
 ![Domain Model](images/DomainModel.png "Domain Model")
 
 ![Export Menu](images/ExportMenu.png "Export Menu")
 
-2. Publish
+2.) Publish
 
 ![Export Package to XMI](images/ExportPackageToXMIDialog.png "Export Package to XMI")
 
-3. XMI Version 2.1 wählen
+3.) XMI Version 2.1 wählen
 
 ![Publish Model Package Settings](images/publishModelPackage.png "Publish Model Package Settings")
 
-4. EA Graphiken exportieren -> uncheck
+4.) EA Graphiken exportieren -> uncheck
 
 ![Publish Model Package Settings](images/publishModelPackage_2.png "Publish Model Package Settings")
 
-5. Exclude EA Extensions -> check
+5.) Exclude EA Extensions -> check
 
 ![Publish Model Package Settings](images/publishModelPackage_3.png "Publish Model Package Settings")
 
-6. Klick Export
+6.) Klick Export
 
 ![Publish Model Package Settings](images/publishModelPackage_4.png "Publish Model Package Settings")
 
