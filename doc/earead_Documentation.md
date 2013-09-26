@@ -8,10 +8,12 @@ EA Reader Dokumentation
 
 Einführung
 ----------
-Das Ziel des Projekts ist es die Erstellung eines Torque Schemas
-aus einem vorhandenen UML Klassen-Diagramm zu erzeugen. 
+Das Ziel des Projekts ist es, ein Datenbankschema in einem UML Werkzeu
+zu modellieren und daraus eine Schemadefinition für einen Java OR-Mapper
+zu erzeugen. Dafür soll als UML-Werkzeug Sparx Enterprise Architect
+und als OR Mapper Torque verwendet werden.
 Da das manuelle Erstellen des Schemas mit viel Arbeitsaufwand verbunden ist, 
-kann hierbei durch Einbindung in den Worflow die Automatisierung 
+kann hierbei durch Einbindung in den Workflow die Automatisierung 
 der Arbeitsabläufe deutlich erhöht werden. 
 Für kommende Versionen ist hierfür ein entsprechendes Maven Plug-In angedacht.
  Damit wäre dann die Ausführung durch einen Build-Server möglich.
@@ -113,6 +115,7 @@ in das Programm importiert werden.
 Dadurch sind die Informationen relativ leicht zugänglich. 
 
 _Contra_
+
 Allerdings ist der Entwicklungs-/Wartungs- und Weiterentwicklungsaufwand
 im Vergleich zu den anderen Lösungen viel zu hoch.
 Da der Enterprise Architect kein reines standard-XMI exportiert,
@@ -151,12 +154,12 @@ Arbeitsablauf
 
 ### Benötigte Programme und Versionen
 
-_Mindestanforderungen_
+#### Mindestanforderungen
 
 * Java J2SE-1.5, 32 oder 64 bit
 * Enterprise Architect Version 8 oder höher
 
-_Vorgehen im EA_
+#### Vorgehen im EA
 
 Folgende Vorgehensweise beim Arbeiten mit dem Enterprise Architect
 ist sehr wichtig da es ansonsten zu Problemen bei der Verwendung des EA Readers
@@ -164,21 +167,33 @@ kommen kann.
 
 Schritte zum Export des UML Klassendiagramms aus dem Enterprise Architect:
 
-1. Rechtsklick auf Domain Model -> Import/Export 
+1. Rechtsklick auf Domain Model -> Import/Export
+
 ![Domain Model](images/DomainModel.png "Domain Model")
+
 ![Export Menu](images/ExportMenu.png "Export Menu")
+
 2. Publish
+
 ![Export Package to XMI](images/ExportPackageToXMIDialog.png "Export Package to XMI")
-3. XMI Version 2.1
+
+3. XMI Version 2.1 wählen
+
 ![Publish Model Package Settings](images/publishModelPackage.png "Publish Model Package Settings")
+
 4. EA Graphiken exportieren -> uncheck
+
 ![Publish Model Package Settings](images/publishModelPackage.png_2 "Publish Model Package Settings")
+
 5. Exclude EA Extensions -> check
+
 ![Publish Model Package Settings](images/publishModelPackage.png_3 "Publish Model Package Settings")
+
 6. Klick Export
+
 ![Publish Model Package Settings](images/publishModelPackage.png_4 "Publish Model Package Settings")
 
-Probleme
+#### Probleme
 
 Wenn die beiden Optionen Export Diagrams und Exclude EA Extensions 
 nicht unchecked beziehungsweise checked werden, 
@@ -197,22 +212,22 @@ Da der Enterprise Architect keine Java konformen Datentypen ausgibt,
 ergänzt der Transformator in einem ersten Schritt die XMI Export Datei
 mit einem Abschnitt, in dem den Enterprise Architect Datentypen
 entsprechende Java Datentypen zugeordnet werden:
-`<xmi:Extension extender="Enterprise Architect" extenderID="6.5">
-  <primitivetypes>
-    <packagedElement name="EA_PrimitiveTypes_Package"
-      visibility="public" xmi:id="EAPrimitiveTypesPackage"
-      xmi:type="uml:Package">
-        <packagedElement name="EA_Java_Types_Package"
-          visibility="public" xmi:id="EAJavaTypesPackage"
-          xmi:type="uml:Package">
-            <packagedElement name="int" visibility="public"
-              xmi:id="EAJava_int" xmi:type="uml:PrimitiveType"/>
-            <packagedElement name="String" visibility="public"
-              xmi:id="EAJava_String" xmi:type="uml:PrimitiveType"/>
-        </packagedElement>
-    </packagedElement>
-  </primitivetypes>
-</xmi:Extension></xmi:XMI>`
+> <xmi:Extension extender="Enterprise Architect" extenderID="6.5">
+>   <primitivetypes>
+>     <packagedElement name="EA_PrimitiveTypes_Package"
+>       visibility="public" xmi:id="EAPrimitiveTypesPackage"
+>       xmi:type="uml:Package">
+>         <packagedElement name="EA_Java_Types_Package"
+>           visibility="public" xmi:id="EAJavaTypesPackage"
+>           xmi:type="uml:Package">
+>             <packagedElement name="int" visibility="public"
+>               xmi:id="EAJava_int" xmi:type="uml:PrimitiveType"/>
+>             <packagedElement name="String" visibility="public"
+>               xmi:id="EAJava_String" xmi:type="uml:PrimitiveType"/>
+>         </packagedElement>
+>     </packagedElement>
+>   </primitivetypes>
+> </xmi:Extension></xmi:XMI>
 
 #### Ergänzung der Schlüsselattribute
 
@@ -221,14 +236,14 @@ als Custom Profile eingetragen und nicht als Attributeigenschaft isID="true".
 Daher ergänzt der Transformator diese Attributeigenschaft
 bei den Schlüsselattributen.
 
-`<packagedElement name="Class1" visibility="public"
-  xmi:id="EAID_9F0EBB09_7974_41f4_B1E9_D9EBB2099E6D"
-  xmi:type="uml:Class">
-    <ownedAttribute isDerived="false" isDerivedUnion="false"
-      isID="true" isOrdered="false" isReadOnly="false" isStatic="false"
-      isUnique="true" name="class1_ID" visibility="private"
-      xmi:id="EAID_85F5481E_795C_4c93_A204_F71B3AC0CFBA"
-      xmi:type="uml:Property">`
+> <packagedElement name="Class1" visibility="public"
+>   xmi:id="EAID_9F0EBB09_7974_41f4_B1E9_D9EBB2099E6D"
+>   xmi:type="uml:Class">
+>     <ownedAttribute isDerived="false" isDerivedUnion="false"
+>       isID="true" isOrdered="false" isReadOnly="false" isStatic="false"
+>       isUnique="true" name="class1_ID" visibility="private"
+>       xmi:id="EAID_85F5481E_795C_4c93_A204_F71B3AC0CFBA"
+>       xmi:type="uml:Property">`
       
 #### Ergänzung der Längenangaben der Attribute
 
