@@ -212,22 +212,22 @@ Da der Enterprise Architect keine Java konformen Datentypen ausgibt,
 ergänzt der Transformator in einem ersten Schritt die XMI Export Datei
 mit einem Abschnitt, in dem den Enterprise Architect Datentypen
 entsprechende Java Datentypen zugeordnet werden:
-> <xmi:Extension extender="Enterprise Architect" extenderID="6.5">
->   <primitivetypes>
->     <packagedElement name="EA_PrimitiveTypes_Package"
->       visibility="public" xmi:id="EAPrimitiveTypesPackage"
->       xmi:type="uml:Package">
->         <packagedElement name="EA_Java_Types_Package"
->           visibility="public" xmi:id="EAJavaTypesPackage"
->           xmi:type="uml:Package">
->             <packagedElement name="int" visibility="public"
->               xmi:id="EAJava_int" xmi:type="uml:PrimitiveType"/>
->             <packagedElement name="String" visibility="public"
->               xmi:id="EAJava_String" xmi:type="uml:PrimitiveType"/>
->         </packagedElement>
->     </packagedElement>
->   </primitivetypes>
-> </xmi:Extension></xmi:XMI>
+    <xmi:Extension extender="Enterprise Architect" extenderID="6.5">
+      <primitivetypes>
+        <packagedElement name="EA_PrimitiveTypes_Package"
+          visibility="public" xmi:id="EAPrimitiveTypesPackage"
+          xmi:type="uml:Package">
+            <packagedElement name="EA_Java_Types_Package"
+              visibility="public" xmi:id="EAJavaTypesPackage"
+              xmi:type="uml:Package">
+                <packagedElement name="int" visibility="public"
+                  xmi:id="EAJava_int" xmi:type="uml:PrimitiveType"/>
+                <packagedElement name="String" visibility="public"
+               xmi:id="EAJava_String" xmi:type="uml:PrimitiveType"/>
+            </packagedElement>
+        </packagedElement>
+      </primitivetypes>
+    </xmi:Extension></xmi:XMI>
 
 #### Ergänzung der Schlüsselattribute
 
@@ -236,14 +236,14 @@ als Custom Profile eingetragen und nicht als Attributeigenschaft isID="true".
 Daher ergänzt der Transformator diese Attributeigenschaft
 bei den Schlüsselattributen.
 
-> <packagedElement name="Class1" visibility="public"
->   xmi:id="EAID_9F0EBB09_7974_41f4_B1E9_D9EBB2099E6D"
->   xmi:type="uml:Class">
->     <ownedAttribute isDerived="false" isDerivedUnion="false"
->       isID="true" isOrdered="false" isReadOnly="false" isStatic="false"
->       isUnique="true" name="class1_ID" visibility="private"
->       xmi:id="EAID_85F5481E_795C_4c93_A204_F71B3AC0CFBA"
->       xmi:type="uml:Property">`
+    <packagedElement name="Class1" visibility="public"
+      xmi:id="EAID_9F0EBB09_7974_41f4_B1E9_D9EBB2099E6D"
+      xmi:type="uml:Class">
+        <ownedAttribute isDerived="false" isDerivedUnion="false"
+          isID="true" isOrdered="false" isReadOnly="false" isStatic="false"
+          isUnique="true" name="class1_ID" visibility="private"
+          xmi:id="EAID_85F5481E_795C_4c93_A204_F71B3AC0CFBA"
+          xmi:type="uml:Property">`
       
 #### Ergänzung der Längenangaben der Attribute
 
