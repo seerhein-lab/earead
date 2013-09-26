@@ -183,15 +183,15 @@ Schritte zum Export des UML Klassendiagramms aus dem Enterprise Architect:
 
 4. EA Graphiken exportieren -> uncheck
 
-![Publish Model Package Settings](images/publishModelPackage.png_2 "Publish Model Package Settings")
+![Publish Model Package Settings](images/publishModelPackage_2.png "Publish Model Package Settings")
 
 5. Exclude EA Extensions -> check
 
-![Publish Model Package Settings](images/publishModelPackage.png_3 "Publish Model Package Settings")
+![Publish Model Package Settings](images/publishModelPackage_3.png "Publish Model Package Settings")
 
 6. Klick Export
 
-![Publish Model Package Settings](images/publishModelPackage.png_4 "Publish Model Package Settings")
+![Publish Model Package Settings](images/publishModelPackage_4.png "Publish Model Package Settings")
 
 #### Probleme
 
