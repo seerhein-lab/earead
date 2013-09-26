@@ -1,6 +1,7 @@
 package com.seitenbau.common;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -85,7 +86,7 @@ public class FileHelperTest {
 		}
 		
 		// \n is caused by out.write
-		String expected = "Test\n";
+		String expected = "Test" + System.getProperty("line.separator");
 		String content = FileHelper.getContents(testFile);
 
 		assertEquals(expected, content);
