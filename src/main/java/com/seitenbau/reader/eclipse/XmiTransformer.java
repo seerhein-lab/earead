@@ -1,7 +1,7 @@
 package com.seitenbau.reader.eclipse;
 
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -229,7 +229,7 @@ public abstract class XmiTransformer {
 		String method = "writeTransformedFile(): ";
 		LOG.debug(method + "Start");
 
-		StreamResult outputStream = new StreamResult(new FileWriter(targetFile));
+		StreamResult outputStream = new StreamResult(new FileOutputStream(targetFile));
 		DOMSource xmiSource = new DOMSource(doc);
 		Transformer transformer = TransformerFactory.newInstance()
 				.newTransformer();
