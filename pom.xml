@@ -94,6 +94,20 @@
       <scope>system</scope>
       <systemPath>${project.basedir}/lib/org.eclipse.uml2.uml_4.0.2.v20130114-0902.jar</systemPath>
     </dependency>
+    
+    <!-- test -->
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-all</artifactId>
+      <version>1.9.5</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <build>
