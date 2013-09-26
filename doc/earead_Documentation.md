@@ -212,6 +212,7 @@ Da der Enterprise Architect keine Java konformen Datentypen ausgibt,
 ergänzt der Transformator in einem ersten Schritt die XMI Export Datei
 mit einem Abschnitt, in dem den Enterprise Architect Datentypen
 entsprechende Java Datentypen zugeordnet werden:
+
     <xmi:Extension extender="Enterprise Architect" extenderID="6.5">
       <primitivetypes>
         <packagedElement name="EA_PrimitiveTypes_Package"
